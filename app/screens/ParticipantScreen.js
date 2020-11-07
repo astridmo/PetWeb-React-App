@@ -14,16 +14,16 @@ function ParticipantScreen(props) {
   return (
     <SafeAreaView>
       <Image
-        style={styles.background}
+        style={styles.image}
         source={require("../assets/background2.jpg")}
-      ></Image>
+      />
       <View style={styles.logOutBtn}> Log Out</View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
+  image: {
     flex: 1,
     opacity: 0.2,
   },
