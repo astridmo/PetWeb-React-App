@@ -22,7 +22,7 @@ export default function App() {
   console.log(require("./assets/icon.png"));
 
   return (
-    <ParticipantScreen/>
+    <WelcomeScreen />
 //     <SafeAreaView style={styles.top}>
 //       <Text style={styles.title} numberOfLines={1}>
 //         {" "}
