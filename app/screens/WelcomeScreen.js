@@ -18,7 +18,8 @@ import ParticipantScreen from "./ParticipantScreen";
 
 function WelcomeScreen(props) {
   function handleLogIn() {
-    return alert("Login not made yet"), (<ParticipantScreen />);
+    return alert("Login not made yet"), 
+    <View><ParticipantScreen/>)</View>; // This does not work
   }
 
   return (
@@ -30,7 +31,6 @@ function WelcomeScreen(props) {
             "https://nordnorge.com/content/uploads/2019/12/004317_GEIR-STIAN-A-LARSEN_www.finnmarkslopet.no_-1.jpg",
         }}
       >
-
       </ImageBackground>
         <View style={styles.logoContainer}>
           <Text style={styles.title}>PETWEB</Text>

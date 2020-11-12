@@ -12,17 +12,61 @@ import {
   Button,
   Platform,
 } from "react-native";
+import LogInScreen from "./app/screens/LogInScreen";
 import ParticipantScreen from "./app/screens/ParticipantScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
+
 //import { useDimensions } from "@react-native-community/hooks"; //Cannot find this file. Why??
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
-  console.log("App executed");
-  const handlePress = () => console.log("Text pressed");
-  console.log(require("./assets/icon.png"));
+const Root = createStackNavigator()
 
+const Screen1 = ({ navigation, route }) => {
   return (
-    <WelcomeScreen />
+    <Button onPress={ () => {
+      //navigation.push('Screen2', { paramA: 'Hello!' })
+      navigation.navigate('Screen2')
+    }}
+    />
+    ) 
+}
+
+const Screen2 = ({ navigation, route }) => {
+  return (
+  //<Text>{route.params.paramA}</Text>
+  <Text>Hello world</Text>
+  )
+}
+const Screen3 = ({ navigation, route }) => {
+  return <Text>Screen3</Text>
+}
+
+
+function App() {
+  return (
+    <NavigationContainer>
+    <Root.Navigator>
+      <Root.Screen name="Screen1" component={Screen1} />
+      <Root.Screen name="Screen2" component={Screen2} />
+      <Root.Screen name="Screen3" component={Screen3} />
+    </Root.Navigator>
+  </NavigationContainer>
+  );
+}
+
+export default App;
+
+
+// function App() {
+//   console.log("App executed");
+//   const handlePress = () => console.log("Text pressed");
+//   console.log(require("./assets/icon.png"));
+
+//   return (
+
+   // <LogInScreen title="LogInScreen"/>
+    //<WelcomeScreen title="Welcome screen"/>
 //     <SafeAreaView style={styles.top}>
 //       <Text style={styles.title} numberOfLines={1}>
 //         {" "}
@@ -68,8 +112,8 @@ export default function App() {
 //         </TouchableOpacity>
 //       </View>
 //     </SafeAreaView>
-);
-}
+// );
+// }
 
 const styles = StyleSheet.create({
   top: {

@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
   RefreshControlBase,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   View,
 } from "react-native";
 
 import colors from "../config/colors";
 
+
+
+
 function ParticipantScreen(props) {
+  const [searchMusher, setSearchMusher] = useState("")
+  const [searchDog, setSearchDog] = useState()
+
   return (
     <SafeAreaView>
       <Image
@@ -18,6 +25,7 @@ function ParticipantScreen(props) {
         source={require("../assets/background2.jpg")}
       />
       <View style={styles.logOutBtn}> Log Out</View>
+
     </SafeAreaView>
   );
 }
