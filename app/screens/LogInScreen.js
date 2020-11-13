@@ -6,13 +6,22 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import colors from "../config/colors";
 
-function LogInScreen(props) {
+function LogInScreen({ props, navigation, route }) {
   const [text, setText] = useState("");
-  console.log(text)
+  console.log(text);
+  function handleLogIn() {
+    return (
+      alert(
+        "Login not made yet. \nYou will be redireced to Participant Screen as if logged in"
+      ),
+      navigation.push("ParticipantScreen")
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,10 +42,13 @@ function LogInScreen(props) {
           }}
         />
         <Text style={styles.logIn}>
-            {'\n'} You entered: {text}
+          {"\n"} You entered: {text}
         </Text>
-        
       </View>
+
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogIn}>
+        <Text> Login </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -53,9 +65,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   logIn: {
-      fontSize: 42
-
-  }
+    fontSize: 42,
+  },
 });
 
 export default LogInScreen;

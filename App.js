@@ -22,34 +22,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Root = createStackNavigator()
 
-const Screen1 = ({ navigation, route }) => {
-  return (
-    <Button onPress={ () => {
-      //navigation.push('Screen2', { paramA: 'Hello!' })
-      navigation.navigate('Screen2')
-    }}
-    />
-    ) 
-}
-
-const Screen2 = ({ navigation, route }) => {
-  return (
-  //<Text>{route.params.paramA}</Text>
-  <Text>Hello world</Text>
-  )
-}
-const Screen3 = ({ navigation, route }) => {
-  return <Text>Screen3</Text>
-}
-
-
 function App() {
   return (
     <NavigationContainer>
     <Root.Navigator>
-      <Root.Screen name="Screen1" component={Screen1} />
-      <Root.Screen name="Screen2" component={Screen2} />
-      <Root.Screen name="Screen3" component={Screen3} />
+      <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
+      <Root.Screen name="LoginScreen" component={LogInScreen} />
+      <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
     </Root.Navigator>
   </NavigationContainer>
   );
