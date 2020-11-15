@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Button,
   Image,
   ImageBackground,
   RefreshControlBase,
@@ -12,6 +13,7 @@ import {
 
 import app from "../../App.js";
 import colors from "../config/colors";
+import Icon from "react-native-vector-icons/AntDesign";
 
 function ParticipantScreen({ navigation, props, route }) {
   const [searchMusher, setSearchMusher] = useState("");
@@ -25,35 +27,51 @@ function ParticipantScreen({ navigation, props, route }) {
     return navigation.navigate("WelcomeScreen");
   }
 
-  return (
-    <SafeAreaView>
-      {/* <Image
+  {
+    /* <Image
         style={styles.image}
-        source={require("../assets/background2.jpg")} */}
+        s */
+  }
+  return (
+    <SafeAreaView style={styles.container}>
       <ImageBackground //Adding the background of the page
-        style={styles.background}
-        source={{
-          uri:
-            "https://nordnorge.com/content/uploads/2019/12/004317_GEIR-STIAN-A-LARSEN_www.finnmarkslopet.no_-1.jpg",
-        }}
+      // style={styles.background}
+      // source={require("../assets/background2.jpg")}
       ></ImageBackground>
-      <TouchableOpacity style={styles.logOutBtn} onPress={handleLogOut}>Log Out
-      </TouchableOpacity>
+      <View style={styles.fixToText}>
+        <Icon name="user" size={30} color={colors.black} />
+        <Button color={colors.primary} onPress={handleLogOut} title="Log out" />
+      </View>
+
+      {/* <TouchableOpacity style={styles.logOutBtn} onPress={handleLogOut}>
+        <Text> <Icon name="user" size={30} color="#900" /> Login </Text>
+      </TouchableOpacity> */}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
+  container: {
     flex: 1,
+    //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
+    backgroundColor: colors.white,
+  },
+  image: {
+    flex: 0,
   },
   background: {
     flex: 1,
+    opacity: 0.2,
+    color: colors.black,
+  },
+  fixToText: {
+    flexDirection: "row",
+    // justifyContent: 'space',
   },
   logOutBtn: {
     width: 50,
     height: 50,
-    backgroundColor: colors.primary,
+    color: colors.primary,
     position: "absolute",
     top: 40,
     right: 40,

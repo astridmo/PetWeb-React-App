@@ -47,7 +47,7 @@ function LogInScreen({ props, navigation, route }) {
           {"\n"} You entered: {text}
         </Text>
       </View>
-
+    
       <TouchableOpacity style={styles.loginButton} onPress={handleLogIn}>
         <Text > <Icon name="rocket1" size={30} color="#900" /> Login </Text>
       </TouchableOpacity>

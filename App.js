@@ -28,9 +28,10 @@ function App() {
   return (
     <NavigationContainer>
     <Root.Navigator>
+      <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
       <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
       <Root.Screen name="LoginScreen" component={LogInScreen} />
-      <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
+      
     </Root.Navigator>
   </NavigationContainer>
   );
