@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 
+import Icon from 'react-native-vector-icons/AntDesign';
+
 function LogInScreen({ props, navigation, route }) {
   const [text, setText] = useState("");
   console.log(text);
@@ -47,7 +49,7 @@ function LogInScreen({ props, navigation, route }) {
       </View>
 
       <TouchableOpacity style={styles.loginButton} onPress={handleLogIn}>
-        <Text> Login </Text>
+        <Text > <Icon name="rocket1" size={30} color="#900" /> Login </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

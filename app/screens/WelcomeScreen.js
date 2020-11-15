@@ -19,6 +19,8 @@ import colors from "../config/colors";
 import LogInScreen from "./LogInScreen";
 import ParticipantScreen from "./ParticipantScreen";
 
+import Icon from 'react-native-vector-icons/AntDesign';
+
 function WelcomeScreen({ props, navigation, route }) {
   function goToLogIn() {
     return navigation.push("LoginScreen");
@@ -43,7 +45,7 @@ function WelcomeScreen({ props, navigation, route }) {
       </View>
 
       <TouchableOpacity style={styles.loginButton} onPress={goToLogIn}>
-        <Text> Login </Text>
+        <Text> <Icon name="user" size={30} color="#900" /> Login </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

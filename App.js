@@ -16,6 +16,8 @@ import LogInScreen from "./app/screens/LogInScreen";
 import ParticipantScreen from "./app/screens/ParticipantScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
+import Icon from 'react-native-vector-icons/AntDesign';
+
 //import { useDimensions } from "@react-native-community/hooks"; //Cannot find this file. Why??
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
