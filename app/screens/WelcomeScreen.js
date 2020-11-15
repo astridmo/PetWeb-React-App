@@ -1,6 +1,7 @@
 // This file is the Welcome screen of the app for PetWeb SB.
 // The page will ask the user to log in
 
+import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import {
   Image,
@@ -13,12 +14,16 @@ import {
   View,
 } from "react-native";
 
+import App from "../../App.js";
 import colors from "../config/colors";
+import LogInScreen from "./LogInScreen";
 import ParticipantScreen from "./ParticipantScreen";
 
-function WelcomeScreen(props) {
-  function handleLogIn() {
-    return alert("Login not made yet"), (<ParticipantScreen />);
+import Icon from 'react-native-vector-icons/AntDesign';
+
+function WelcomeScreen({ props, navigation, route }) {
+  function goToLogIn() {
+    return navigation.push("LoginScreen");
   }
 
   return (
@@ -29,20 +34,18 @@ function WelcomeScreen(props) {
           uri:
             "https://nordnorge.com/content/uploads/2019/12/004317_GEIR-STIAN-A-LARSEN_www.finnmarkslopet.no_-1.jpg",
         }}
-      >
+      ></ImageBackground>
+      <View style={styles.logoContainer}>
+        <Text style={styles.title}>PETWEB</Text>
+        <Image
+          style={styles.logo}
+          source={require("C:/Users/astri/PetWeb/app/assets/dog_logo.jpg")}
+        />
+        <Text>Enjoy the race</Text>
+      </View>
 
-      </ImageBackground>
-        <View style={styles.logoContainer}>
-          <Text style={styles.title}>PETWEB</Text>
-          <Image
-            style={styles.logo}
-            source={require("C:/Users/astri/PetWeb/app/assets/dog_logo.jpg")}
-          />
-          <Text>Enjoy the race</Text>
-        </View>
-      
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogIn}>
-        <Text> Login </Text>
+      <TouchableOpacity style={styles.loginButton} onPress={goToLogIn}>
+        <Text> <Icon name="user" size={30} color="#900" /> Login </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

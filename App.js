@@ -12,17 +12,42 @@ import {
   Button,
   Platform,
 } from "react-native";
+import LogInScreen from "./app/screens/LogInScreen";
 import ParticipantScreen from "./app/screens/ParticipantScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
+
+import Icon from 'react-native-vector-icons/AntDesign';
+
 //import { useDimensions } from "@react-native-community/hooks"; //Cannot find this file. Why??
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
-  console.log("App executed");
-  const handlePress = () => console.log("Text pressed");
-  console.log(require("./assets/icon.png"));
+const Root = createStackNavigator()
 
+function App() {
   return (
-    <WelcomeScreen />
+    <NavigationContainer>
+    <Root.Navigator>
+      <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
+      <Root.Screen name="LoginScreen" component={LogInScreen} />
+      <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
+    </Root.Navigator>
+  </NavigationContainer>
+  );
+}
+
+export default App;
+
+
+// function App() {
+//   console.log("App executed");
+//   const handlePress = () => console.log("Text pressed");
+//   console.log(require("./assets/icon.png"));
+
+//   return (
+
+   // <LogInScreen title="LogInScreen"/>
+    //<WelcomeScreen title="Welcome screen"/>
 //     <SafeAreaView style={styles.top}>
 //       <Text style={styles.title} numberOfLines={1}>
 //         {" "}
@@ -68,8 +93,8 @@ export default function App() {
 //         </TouchableOpacity>
 //       </View>
 //     </SafeAreaView>
-);
-}
+// );
+// }
 
 const styles = StyleSheet.create({
   top: {
