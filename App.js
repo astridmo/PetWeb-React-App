@@ -13,6 +13,7 @@ import {
   Platform,
 } from "react-native";
 import LogInScreen from "./app/screens/LogInScreen";
+import OrganizerScreen from './app/screens/OrganizerScreen';
 import ParticipantScreen from "./app/screens/ParticipantScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
@@ -28,10 +29,10 @@ function App() {
   return (
     <NavigationContainer>
     <Root.Navigator>
-      <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
+      <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
       <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
       <Root.Screen name="LoginScreen" component={LogInScreen} />
-      
+      <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
     </Root.Navigator>
   </NavigationContainer>
   );
