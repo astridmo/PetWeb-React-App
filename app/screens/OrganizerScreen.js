@@ -3,7 +3,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import {
-  Button,
   Image,
   ImageBackground,
   Platform,
@@ -13,13 +12,18 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Button, SearchBar } from "react-native-elements";
 
 import App from "../../App.js";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/AntDesign";
+import MusherOverviewScreen from "./MusherOverviewScreen";
 
 function OrganizerScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
+  function musherButton() {
+    return navigation.push("MusherOverviewScreen");
+  }
 
   function handleLogOut() {
     return navigation.navigate("WelcomeScreen");
@@ -32,7 +36,11 @@ function OrganizerScreen({ navigation }) {
       ></ImageBackground>
       <View style={styles.fixToText}>
         <Icon name="user" size={30} color={colors.black} />
-        <Button color={colors.primary} onPress={handleLogOut} title="Log out" />
+        <Button
+          buttonStyle={{ backgroundColor: colors.primary }}
+          onPress={handleLogOut}
+          title="Log out"
+        />
       </View>
 
       <View style={styles.content}>
@@ -41,6 +49,13 @@ function OrganizerScreen({ navigation }) {
           <Separator />
           <Text style={styles.textSquare}>
             Search for musher to find the participant's dogs in the race
+          </Text>
+          <Text style={styles.textSquare}>or</Text>
+          <Text style={styles.textSquare}>
+            <TouchableOpacity onPress={musherButton}>
+              <Icon name="profile" size={30} color={colors.black} />
+            </TouchableOpacity>
+            See the overview of mushers here!
           </Text>
         </View>
         <Separator />
@@ -91,6 +106,7 @@ const styles = StyleSheet.create({
     // height: "50%",
     flex: 1,
     backgroundColor: colors.primary,
+    alignItems: "center",
   },
   textSquare: {
     color: "#737373",

@@ -13,33 +13,36 @@ import {
   Platform,
 } from "react-native";
 import LogInScreen from "./app/screens/LogInScreen";
-import OrganizerScreen from './app/screens/OrganizerScreen';
+import MusherOverviewScreen from "./app/screens/MusherOverviewScreen";
+import OrganizerScreen from "./app/screens/OrganizerScreen";
 import ParticipantScreen from "./app/screens/ParticipantScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from "react-native-vector-icons/AntDesign";
 
 //import { useDimensions } from "@react-native-community/hooks"; //Cannot find this file. Why??
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const Root = createStackNavigator()
+const Root = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-    <Root.Navigator>
-      <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
-      <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
-      <Root.Screen name="LoginScreen" component={LogInScreen} />
-      <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
-    </Root.Navigator>
-  </NavigationContainer>
+      <Root.Navigator>
+        <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
+        <Root.Screen name="MusherOverviewScreen" component={MusherOverviewScreen}/>
+        
+        <Root.Screen name="LoginScreen" component={LogInScreen} />
+        <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        
+        <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
+      </Root.Navigator>
+    </NavigationContainer>
   );
 }
 
 export default App;
-
 
 // function App() {
 //   console.log("App executed");
@@ -48,8 +51,8 @@ export default App;
 
 //   return (
 
-   // <LogInScreen title="LogInScreen"/>
-    //<WelcomeScreen title="Welcome screen"/>
+// <LogInScreen title="LogInScreen"/>
+//<WelcomeScreen title="Welcome screen"/>
 //     <SafeAreaView style={styles.top}>
 //       <Text style={styles.title} numberOfLines={1}>
 //         {" "}
