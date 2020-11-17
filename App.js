@@ -12,10 +12,13 @@ import {
   Button,
   Platform,
 } from "react-native";
+
+import DogOverviewScreen from "./app/screens/DogOverviewScreen";
 import LogInScreen from "./app/screens/LogInScreen";
 import MusherOverviewScreen from "./app/screens/MusherOverviewScreen";
 import OrganizerScreen from "./app/screens/OrganizerScreen";
 import ParticipantScreen from "./app/screens/ParticipantScreen";
+import ProfileScreen from './app/screens/ProfileScreen';
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 import Icon from "react-native-vector-icons/AntDesign";
@@ -27,15 +30,18 @@ import { createStackNavigator } from "@react-navigation/stack";
 const Root = createStackNavigator();
 
 function App() {
+  
   return (
     <NavigationContainer>
       <Root.Navigator>
+        <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
         <Root.Screen name="MusherOverviewScreen" component={MusherOverviewScreen}/>
         
         <Root.Screen name="LoginScreen" component={LogInScreen} />
-        <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
         
+        <Root.Screen name="DogOverviewScreen" component={DogOverviewScreen} />
+        <Root.Screen name="ProfileScreen" component={ProfileScreen} />
         <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
       </Root.Navigator>
     </NavigationContainer>

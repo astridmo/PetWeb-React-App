@@ -18,9 +18,13 @@ import App from "../../App.js";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/AntDesign";
 import MusherOverviewScreen from "./MusherOverviewScreen";
+import ProfileScreen from './ProfileScreen'
 
 function OrganizerScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
+  function dogButton() {
+    return navigation.navigate("DogOverviewScreen");
+  }
   function musherButton() {
     return navigation.push("MusherOverviewScreen");
   }
@@ -28,6 +32,11 @@ function OrganizerScreen({ navigation }) {
   function handleLogOut() {
     return navigation.navigate("WelcomeScreen");
   }
+
+  function profileButton() {
+    return navigation.navigate("ProfileScreen")
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground //Adding the background of the page
@@ -35,7 +44,9 @@ function OrganizerScreen({ navigation }) {
       // source={require("../assets/background2.jpg")}
       ></ImageBackground>
       <View style={styles.fixToText}>
-        <Icon name="user" size={30} color={colors.black} />
+        <TouchableOpacity onPress={profileButton}>
+          <Icon name="user" size={30} color={colors.black} />
+        </TouchableOpacity>
         <Button
           buttonStyle={{ backgroundColor: colors.primary }}
           onPress={handleLogOut}
@@ -64,6 +75,13 @@ function OrganizerScreen({ navigation }) {
           <Separator />
           <Text style={styles.textSquare}>
             Search with chipnumber to find the dog's owner
+          </Text>
+          <Text style={styles.textSquare}>or</Text>
+          <Text style={styles.textSquare}>
+            <TouchableOpacity onPress={dogButton}>
+              <Icon name="profile" size={30} color={colors.black} />
+            </TouchableOpacity>
+            See the overview of dogs here!
           </Text>
         </View>
         <Separator />

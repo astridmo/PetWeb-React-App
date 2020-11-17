@@ -15,14 +15,14 @@ import App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
 
-function MusherOverviewScreen({ navigation }) {
+function DogOverviewScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
 
   function handleLogOut() {
     return navigation.navigate("WelcomeScreen");
   }
-  function dogButton() {
-    return navigation.navigate("DogOverviewScreen");
+  function musherButton() {
+    return navigation.navigate("MusherOverviewScreen");
   }
   function profileButton() {
     return navigation.navigate("ProfileScreen")
@@ -50,10 +50,10 @@ function MusherOverviewScreen({ navigation }) {
           alignSelf: "center",
         }}
       >
-        <Button title="Dog overview" onPress={dogButton} />
-        <Card.Title> Mushers overview</Card.Title>
+        <Button title="Musher overview" onPress={musherButton} />
+        <Card.Title> Dogs overview</Card.Title>
         <Card.Divider></Card.Divider>
-        <Text> Here a list of mushers will be provided</Text>
+        <Text> Here a list of dogs will be provided</Text>
       </Card>
     </SafeAreaView>
   );
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MusherOverviewScreen;
+export default DogOverviewScreen;

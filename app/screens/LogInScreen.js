@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import colors from "../config/colors";
+import {Button} from "react-native-elements";
 
 import Icon from "react-native-vector-icons/AntDesign";
 
@@ -21,9 +22,9 @@ function LogInScreen({ props, navigation, route }) {
     // if (password == "Finnmarkslopet2021") {
       return (
         alert(
-          "Login not made yet. \nYou will be redireced to Participant Screen as if logged in"
+          "Login not made yet. \nYou will be redireced to Organizer Screen as if logged in"
         ),
-        navigation.push("ParticipantScreen")
+        navigation.push("OrganizerScreen")
       );
     // }
     // return (
@@ -53,13 +54,8 @@ function LogInScreen({ props, navigation, route }) {
           {"\n"} You entered: {password}
         </Text>
       </View>
-
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogIn}>
-        <Text>
-          {" "}
-          <Icon name="rocket1" size={30} color="#900" /> Login{" "}
-        </Text>
-      </TouchableOpacity>
+      
+      <Button title="Login" onPress={handleLogIn}/>
     </SafeAreaView>
   );
 }

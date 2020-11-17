@@ -45,7 +45,7 @@ function WelcomeScreen({ props, navigation, route }) {
       </View>
 
       <TouchableOpacity style={styles.loginButton} onPress={goToLogIn}>
-        <Text> <Icon name="user" size={30} color="#900" /> Login </Text>
+        <Text> Login </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
