@@ -23,7 +23,9 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 function WelcomeScreen({ props, navigation, route }) {
   function goToLogIn() {
-    return navigation.push("LoginScreen");
+    return (
+     navigation.push("LoginScreen")
+    );
   }
 
   return (

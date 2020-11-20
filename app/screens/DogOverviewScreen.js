@@ -70,13 +70,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
-    backgroundColor: colors.white,
+    backgroundColor: "#737373",
   },
   content: {
     alignItems: "center",
     justifyContent: "center",
     flex: 0.8,
     color: colors.secondary,
+
   },
   headerSquare: {
     fontSize: 24,
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
     width: "80%",
     // height: "50%",
     flex: 1,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
   },
   textSquare: {
     color: "#737373",

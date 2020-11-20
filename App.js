@@ -1,4 +1,11 @@
 import { StatusBar } from "expo-status-bar";
+// Optionally import the services that you want to use
+//import "firebase/auth";
+//import "firebase/database";
+import "firebase/firestore";
+//import "firebase/functions";
+//import "firebase/storage";
+import * as firebase from 'firebase';
 import React from "react";
 import {
   Dimensions,
@@ -142,3 +149,25 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAziPMTe8PTWoTV6_Mxn42WUkm5QKP-a1s",
+  authDomain: "petweb-react-app.firebaseapp.com",
+  databaseURL: "https://petweb-react-app.firebaseio.com",
+  projectId: "petweb-react-app",
+  storageBucket: "petweb-react-app.appspot.com",
+  messagingSenderId: "157695855727",
+  appId: "1:157695855727:web:4157709348e32028d6519a",
+  measurementId: "G-J3HG884W4N"
+};
+firebase.initializeApp(firebaseConfig);
+
+const dbh = firebase.firestore();
+
+//This is a test
+dbh.collection("characters").doc("mario").set({
+  employment: "plumber",
+  outfitColor: "red",
+  specialAttack: "fireball"
+})
