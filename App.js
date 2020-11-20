@@ -1,4 +1,11 @@
 import { StatusBar } from "expo-status-bar";
+// Optionally import the services that you want to use
+//import "firebase/auth";
+//import "firebase/database";
+import "firebase/firestore";
+//import "firebase/functions";
+//import "firebase/storage";
+import * as firebase from 'firebase';
 import React from "react";
 import {
   Dimensions,
@@ -12,32 +19,43 @@ import {
   Button,
   Platform,
 } from "react-native";
+
+import DogOverviewScreen from "./app/screens/DogOverviewScreen";
 import LogInScreen from "./app/screens/LogInScreen";
+import MusherOverviewScreen from "./app/screens/MusherOverviewScreen";
+import OrganizerScreen from "./app/screens/OrganizerScreen";
 import ParticipantScreen from "./app/screens/ParticipantScreen";
+import ProfileScreen from './app/screens/ProfileScreen';
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from "react-native-vector-icons/AntDesign";
 
 //import { useDimensions } from "@react-native-community/hooks"; //Cannot find this file. Why??
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const Root = createStackNavigator()
+const Root = createStackNavigator();
 
 function App() {
+  
   return (
     <NavigationContainer>
-    <Root.Navigator>
-      <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
-      <Root.Screen name="LoginScreen" component={LogInScreen} />
-      <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
-    </Root.Navigator>
-  </NavigationContainer>
+      <Root.Navigator>
+        <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
+        <Root.Screen name="MusherOverviewScreen" component={MusherOverviewScreen}/>
+        
+        <Root.Screen name="LoginScreen" component={LogInScreen} />
+        
+        <Root.Screen name="DogOverviewScreen" component={DogOverviewScreen} />
+        <Root.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
+      </Root.Navigator>
+    </NavigationContainer>
   );
 }
 
 export default App;
-
 
 // function App() {
 //   console.log("App executed");
@@ -46,8 +64,8 @@ export default App;
 
 //   return (
 
-   // <LogInScreen title="LogInScreen"/>
-    //<WelcomeScreen title="Welcome screen"/>
+// <LogInScreen title="LogInScreen"/>
+//<WelcomeScreen title="Welcome screen"/>
 //     <SafeAreaView style={styles.top}>
 //       <Text style={styles.title} numberOfLines={1}>
 //         {" "}
@@ -131,3 +149,25 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAziPMTe8PTWoTV6_Mxn42WUkm5QKP-a1s",
+  authDomain: "petweb-react-app.firebaseapp.com",
+  databaseURL: "https://petweb-react-app.firebaseio.com",
+  projectId: "petweb-react-app",
+  storageBucket: "petweb-react-app.appspot.com",
+  messagingSenderId: "157695855727",
+  appId: "1:157695855727:web:4157709348e32028d6519a",
+  measurementId: "G-J3HG884W4N"
+};
+firebase.initializeApp(firebaseConfig);
+
+const dbh = firebase.firestore();
+
+//This is a test
+dbh.collection("characters").doc("mario").set({
+  employment: "plumber",
+  outfitColor: "red",
+  specialAttack: "fireball"
+})

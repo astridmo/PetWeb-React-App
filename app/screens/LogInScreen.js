@@ -10,19 +10,26 @@ import {
   View,
 } from "react-native";
 import colors from "../config/colors";
+import {Button} from "react-native-elements";
 
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from "react-native-vector-icons/AntDesign";
 
 function LogInScreen({ props, navigation, route }) {
-  const [text, setText] = useState("");
-  console.log(text);
-  function handleLogIn() {
-    return (
-      alert(
-        "Login not made yet. \nYou will be redireced to Participant Screen as if logged in"
-      ),
-      navigation.push("ParticipantScreen")
-    );
+  const [password, setPassword] = useState("");
+  console.log(password);
+  function handleLogIn(password) {
+    console.log("The text is", password)
+    // if (password == "Finnmarkslopet2021") {
+      return (
+        alert(
+          "Login not made yet. \nYou will be redireced to Organizer Screen as if logged in"
+        ),
+        navigation.push("OrganizerScreen")
+      );
+    // }
+    // return (
+    //   alert("Wrong password!", password)
+    // )
   }
 
   return (
@@ -36,21 +43,19 @@ function LogInScreen({ props, navigation, route }) {
       ></ImageBackground>
       <View>
         <TextInput
-          value={text}
+          value={password}
           style={styles.logIn}
           placeholder="Type here..."
-          onChangeText={(text) => {
-            setText(text);
+          onChangeText={(password) => {
+            setPassword(password);
           }}
         />
         <Text style={styles.logIn}>
-          {"\n"} You entered: {text}
+          {"\n"} You entered: {password}
         </Text>
       </View>
-
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogIn}>
-        <Text > <Icon name="rocket1" size={30} color="#900" /> Login </Text>
-      </TouchableOpacity>
+      
+      <Button title="Login" onPress={handleLogIn}/>
     </SafeAreaView>
   );
 }
