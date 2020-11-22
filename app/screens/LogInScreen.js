@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 import colors from "../config/colors";
-import {Button} from "react-native-elements";
+import { Button } from "react-native-elements";
 
 import Icon from "react-native-vector-icons/AntDesign";
 
@@ -18,14 +18,14 @@ function LogInScreen({ props, navigation, route }) {
   const [password, setPassword] = useState("");
   console.log(password);
   function handleLogIn(password) {
-    console.log("The text is", password)
+    console.log("The text is", password);
     // if (password == "Finnmarkslopet2021") {
-      return (
-        alert(
-          "Login not made yet. \nYou will be redireced to Organizer Screen as if logged in"
-        ),
-        navigation.push("OrganizerScreen")
-      );
+    return (
+      alert(
+        "Login not made yet. \nYou will be redireced to Organizer Screen as if logged in"
+      ),
+      navigation.push("OrganizerScreen")
+    );
     // }
     // return (
     //   alert("Wrong password!", password)
@@ -54,8 +54,8 @@ function LogInScreen({ props, navigation, route }) {
           {"\n"} You entered: {password}
         </Text>
       </View>
-      
-      <Button title="Login" onPress={handleLogIn}/>
+
+      <Button title="Login" onPress={handleLogIn} />
     </SafeAreaView>
   );
 }

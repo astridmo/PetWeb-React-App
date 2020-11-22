@@ -41,7 +41,7 @@ function WelcomeScreen({ props, navigation, route }) {
         <Text style={styles.title}>PETWEB</Text>
         <Image
           style={styles.logo}
-          source={require("C:/Users/astri/PetWeb/app/assets/dog_logo.jpg")}
+          source={require("../assets/dog_logo.jpg")}
         />
         <Text>Enjoy the race</Text>
       </View>

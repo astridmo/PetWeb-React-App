@@ -39,10 +39,10 @@ function OrganizerScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground //Adding the background of the page
+      {/* //<ImageBackground //Adding the background of the page
       // style={styles.background}
       // source={require("../assets/background2.jpg")}
-      ></ImageBackground>
+      ></ImageBackground> */}
       <View style={styles.fixToText}>
         <TouchableOpacity onPress={profileButton}>
           <Icon name="user" size={30} color={colors.black} />
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   fixToText: {
     flexDirection: "row-reverse",
-    justifyContent: "space",
+    justifyContent: "space-around",
     alignItems: "flex-end",
   },
   separator: {

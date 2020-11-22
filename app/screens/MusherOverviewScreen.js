@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Button, Card, SearchBar } from "react-native-elements";
 
-import App from "../../App.js";
+import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
 
@@ -25,7 +25,7 @@ function MusherOverviewScreen({ navigation }) {
     return navigation.navigate("DogOverviewScreen");
   }
   function profileButton() {
-    return navigation.navigate("ProfileScreen")
+    return navigation.navigate("ProfileScreen");
   }
 
   return (
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   fixToText: {
     flexDirection: "row-reverse",
-    justifyContent: "space",
+    //justifyContent: "space-between",
     alignItems: "flex-end",
   },
   separator: {

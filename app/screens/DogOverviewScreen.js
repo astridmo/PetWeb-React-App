@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   fixToText: {
     flexDirection: "row-reverse",
-    justifyContent: "space",
+    justifyContent: "space-around",
     alignItems: "flex-end",
   },
   separator: {
