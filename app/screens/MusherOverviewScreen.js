@@ -105,3 +105,11 @@ const styles = StyleSheet.create({
 });
 
 export default MusherOverviewScreen;
+
+//This is a test
+dbh.collection("characters").doc("donkeykong").set({
+  employment: "gorilla",
+  outfitColor: "brown",
+  specialAttack: "fireball"
+})
+

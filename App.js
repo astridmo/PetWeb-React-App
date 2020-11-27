@@ -172,3 +172,10 @@ dbh.collection("characters").doc("mario").set({
   specialAttack: "fireball"
 })
 //Test
+dbh.collection("characters").doc("langbein").set({
+  employment: "dog",
+  outfitColor: "brown",
+  specialAttack: "fireball"
+})
+
+//Hett
