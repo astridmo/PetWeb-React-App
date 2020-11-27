@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import {
   Image,
   ImageBackground,
@@ -10,10 +10,14 @@ import {
   View,
 } from "react-native";
 import { Button, Card, SearchBar } from "react-native-elements";
+import * as firebase from "firebase";
+import { useNavigation } from '@react-navigation/native';
 
 import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
+import { navigationFunctions, foo, profileButton, helloWorld } from "../config/utilities";
+import HelloWorld from '../components/TextArea/TextArea.component';
 
 function MusherOverviewScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
@@ -25,11 +29,15 @@ function MusherOverviewScreen({ navigation }) {
     return navigation.navigate("DogOverviewScreen");
   }
   function profileButton() {
+    const navigation = useNavigation();
     return navigation.navigate("ProfileScreen");
   }
 
+  console.log(foo());
+
   return (
     <SafeAreaView style={styles.container}>
+      <helloWorld/>
       <View style={styles.fixToText}>
         <TouchableOpacity onPress={profileButton}>
           <Icon name="user" size={30} color={colors.black} />
@@ -52,7 +60,7 @@ function MusherOverviewScreen({ navigation }) {
       >
         <Button title="Dog overview" onPress={dogButton} />
         <Card.Title> Mushers overview</Card.Title>
-        <Card.Divider></Card.Divider>
+        <Card.Divider />
         <Text> Here a list of mushers will be provided</Text>
       </Card>
     </SafeAreaView>
@@ -107,9 +115,8 @@ const styles = StyleSheet.create({
 export default MusherOverviewScreen;
 
 //This is a test
-dbh.collection("characters").doc("donkeykong").set({
-  employment: "gorilla",
-  outfitColor: "brown",
-  specialAttack: "fireball"
-})
-
+// dbh.collection("characters").doc("donkeykong").set({
+//   employment: "gorilla",
+//   outfitColor: "brown",
+//   specialAttack: "fireball"
+// })

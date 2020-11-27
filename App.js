@@ -6,7 +6,7 @@ import "firebase/firestore";
 //import "firebase/functions";
 //import "firebase/storage";
 import * as firebase from 'firebase';
-import React from "react";
+import React, {Component} from "react";
 import {
   Dimensions,
   Image,
@@ -19,6 +19,7 @@ import {
   Button,
   Platform,
 } from "react-native";
+import Home from './app/components/Home/Home.component';
 
 import DogOverviewScreen from "./app/screens/DogOverviewScreen";
 import LogInScreen from "./app/screens/LogInScreen";
@@ -35,6 +36,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Root = createStackNavigator();
+
+class NoteTaker extends Component {
+  render() {
+    return (
+      <Home />
+    );
+  }
+}
 
 function App() {
   
@@ -55,7 +64,8 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+export default NoteTaker;
 
 // function App() {
 //   console.log("App executed");
@@ -172,7 +182,7 @@ dbh.collection("characters").doc("mario").set({
   specialAttack: "fireball"
 })
 //Test
-dbh.collection("characters").doc("langbein").set({
+dbh.collection("characters").doc("kose").set({
   employment: "dog",
   outfitColor: "brown",
   specialAttack: "fireball"
