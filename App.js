@@ -5,8 +5,8 @@ import { StatusBar } from "expo-status-bar";
 import "firebase/firestore";
 //import "firebase/functions";
 //import "firebase/storage";
-import * as firebase from 'firebase';
-import React, {Component} from "react";
+import * as firebase from "firebase";
+import React, { Component } from "react";
 import {
   Dimensions,
   Image,
@@ -19,14 +19,14 @@ import {
   Button,
   Platform,
 } from "react-native";
-import Home from './app/components/Home/Home.component';
+import Home from "./app/components/Home/Home.component";
 
 import DogOverviewScreen from "./app/screens/DogOverviewScreen";
 import LogInScreen from "./app/screens/LogInScreen";
 import MusherOverviewScreen from "./app/screens/MusherOverviewScreen";
 import OrganizerScreen from "./app/screens/OrganizerScreen";
 import ParticipantScreen from "./app/screens/ParticipantScreen";
-import ProfileScreen from './app/screens/ProfileScreen';
+import ProfileScreen from "./app/screens/ProfileScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 import Icon from "react-native-vector-icons/AntDesign";
@@ -39,23 +39,23 @@ const Root = createStackNavigator();
 
 class NoteTaker extends Component {
   render() {
-    return (
-      <Home />
-    );
+    return <Home />;
   }
 }
 
 function App() {
-  
   return (
     <NavigationContainer>
       <Root.Navigator>
         <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
-        <Root.Screen name="MusherOverviewScreen" component={MusherOverviewScreen}/>
-        
+        <Root.Screen
+          name="MusherOverviewScreen"
+          component={MusherOverviewScreen}
+        />
+
         <Root.Screen name="LoginScreen" component={LogInScreen} />
-        
+
         <Root.Screen name="DogOverviewScreen" component={DogOverviewScreen} />
         <Root.Screen name="ProfileScreen" component={ProfileScreen} />
         <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
@@ -64,8 +64,8 @@ function App() {
   );
 }
 
-// export default App;
-export default NoteTaker;
+export default App;
+//export default NoteTaker;
 
 // function App() {
 //   console.log("App executed");
@@ -169,7 +169,7 @@ const firebaseConfig = {
   storageBucket: "petweb-react-app.appspot.com",
   messagingSenderId: "157695855727",
   appId: "1:157695855727:web:4157709348e32028d6519a",
-  measurementId: "G-J3HG884W4N"
+  measurementId: "G-J3HG884W4N",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -179,13 +179,13 @@ const dbh = firebase.firestore();
 dbh.collection("characters").doc("mario").set({
   employment: "plumber",
   outfitColor: "red",
-  specialAttack: "fireball"
-})
+  specialAttack: "fireball",
+});
 //Test
 dbh.collection("characters").doc("kose").set({
   employment: "dog",
   outfitColor: "brown",
-  specialAttack: "fireball"
-})
+  specialAttack: "fireball",
+});
 
 //Hett

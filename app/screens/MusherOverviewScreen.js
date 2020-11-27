@@ -11,13 +11,13 @@ import {
 } from "react-native";
 import { Button, Card, SearchBar } from "react-native-elements";
 import * as firebase from "firebase";
-import { useNavigation } from '@react-navigation/native';
 
 import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
 import { navigationFunctions, foo, profileButton, helloWorld } from "../config/utilities";
 import HelloWorld from '../components/TextArea/TextArea.component';
+import Header from '../components/Header/Header.component';
 
 function MusherOverviewScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
@@ -29,7 +29,6 @@ function MusherOverviewScreen({ navigation }) {
     return navigation.navigate("DogOverviewScreen");
   }
   function profileButton() {
-    const navigation = useNavigation();
     return navigation.navigate("ProfileScreen");
   }
 
@@ -37,7 +36,8 @@ function MusherOverviewScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <helloWorld/>
+      <Header />
+      <HelloWorld/>
       <View style={styles.fixToText}>
         <TouchableOpacity onPress={profileButton}>
           <Icon name="user" size={30} color={colors.black} />
