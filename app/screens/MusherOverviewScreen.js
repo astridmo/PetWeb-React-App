@@ -11,7 +11,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Card, ListItem, SearchBar } from "react-native-elements";
+import {
+  Button,
+  Card,
+  Header,
+  ListItem,
+  SearchBar,
+} from "react-native-elements";
 
 import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -23,7 +29,7 @@ import {
   helloWorld,
 } from "../config/utilities";
 import HelloWorld from "../components/TextArea/TextArea.component";
-import Header from "../components/Header/Header.component";
+import TopHeader from "../components/Header/Header.component";
 //import MusherList from "../components/MusherList";
 //import tempData from "../config/tempData";
 
@@ -80,19 +86,18 @@ function Users() {
           justifyContent: "center",
         }}
       >
-
         {/* <ListItem bottomDivider>
             <ListItem.content>
               {/* <ListItem.title>Hallo</ListItem.title> */}
 
         {/* </ListItem.content>
             /</ListItem> */}
-            <ListItem bottomDivider>
-              <ListItem.Title>{item.name}</ListItem.Title>
-              <ListItem.Subtitle>age: {item.age}</ListItem.Subtitle>
-              <ListItem.Subtitle>User ID: {item.key}</ListItem.Subtitle>
-              <ListItem.Chevron />
-            </ListItem>
+        <ListItem bottomDivider>
+          <ListItem.Title>{item.name}</ListItem.Title>
+          <ListItem.Subtitle>age: {item.age}</ListItem.Subtitle>
+          <ListItem.Subtitle>User ID: {item.key}</ListItem.Subtitle>
+          <ListItem.Chevron />
+        </ListItem>
       </View>
     );
   };
@@ -101,7 +106,6 @@ function Users() {
     <View>
       {" "}
       <FlatList data={users} renderItem={renderItem} />{" "}
-      
     </View>
   );
 }
@@ -186,7 +190,7 @@ function MusherOverviewScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <TopHeader />
       <HelloWorld />
       <View style={styles.fixToText}>
         <TouchableOpacity onPress={profileButton}>
@@ -201,17 +205,25 @@ function MusherOverviewScreen({ navigation }) {
 
       <Card
         containerStyle={{
-          backgroundColor: colors.primary,
-          flex: 0.8,
-          width: "80%",
           alignItems: "center",
           alignSelf: "center",
         }}
       >
-        <Button title="Dog overview" onPress={dogButton} />
-        <Card.Title> Mushers overview</Card.Title>
+        <View style={styles.cardTitle}>
+          <View style={{ flex: 1 }}>
+            <Text> </Text>
+            <Card.Title> Mushers overview</Card.Title>
+          </View>
+          <Card.Divider />
+          <TouchableOpacity
+            style={{ backgroundColor: colors.primary, flex: 1 }}
+          >
+            <Text onPress={dogButton}> </Text>
+            <Card.Title onPress={dogButton}> Dog overview </Card.Title>
+          </TouchableOpacity>
+        </View>
+
         <Card.Divider />
-        <Text> Here a list of mushers will be provided</Text>
         <Users />
       </Card>
     </SafeAreaView>
@@ -236,10 +248,16 @@ const styles = StyleSheet.create({
   //     alignItems: "center",
   //     alignSelf: "center",
   //   },
+  cardTitle: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   container: {
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
   },
   content: {
     alignItems: "center",
@@ -273,7 +291,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MusherOverviewScreen2;
+export default MusherOverviewScreen;
 
 //This is a test
 db.collection("characters").doc("aaab").set({
