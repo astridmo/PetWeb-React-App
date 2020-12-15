@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import {
+  ActivityIndicator,
+  FlatList,
   Image,
   ImageBackground,
   Platform,
@@ -30,6 +32,26 @@ if (firebase.apps.length == 0) {
   firebase.initializeApp(firebaseConfig); // To not re-make the app every time we save
 }
 const db = firebase.firestore();
+
+function Users() {
+  const [loading, setLoading] = useState(true); // Set loading to true on component mount
+  const [users, setUsers] = useState([]); // Initial empty array of users
+
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('characters')
+      .onSnapshot(() => {
+        // see next step
+      });
+
+    // Unsubscribe from events when no longer in use
+    return () => subscriber();
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+}
 
 function MusherOverviewScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
@@ -74,6 +96,7 @@ function MusherOverviewScreen({ navigation }) {
         <Card.Title> Mushers overview</Card.Title>
         <Card.Divider />
         <Text> Here a list of mushers will be provided</Text>
+        <FlatList />
       </Card>
     </SafeAreaView>
   );
