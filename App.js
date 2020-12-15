@@ -21,7 +21,7 @@ import {
   Platform,
   YellowBox,
 } from "react-native";
-import { firebaseConfig } from "./app/config/firebaseConfig";
+import {firebaseConfig} from "./app/config/Fire";
 import Home from "./app/components/Home/Home.component";
 
 import DogOverviewScreen from "./app/screens/DogOverviewScreen";

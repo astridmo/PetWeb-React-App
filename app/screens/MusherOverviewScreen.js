@@ -24,15 +24,24 @@ import {
 } from "../config/utilities";
 import HelloWorld from "../components/TextArea/TextArea.component";
 import Header from "../components/Header/Header.component";
+//import MusherList from "../components/MusherList";
 //import tempData from "../config/tempData";
 
 // Initialize firebase
 import * as firebase from "firebase";
-import { firebaseConfig } from "../config/firebaseConfig";
+import { firebaseConfig } from "../config/Fire";
 if (firebase.apps.length == 0) {
   firebase.initializeApp(firebaseConfig); // To not re-make the app every time we save
 }
 const db = firebase.firestore();
+
+function componentDidMount() {
+  firebase = new Fire((error) => {
+    if (error) {
+      return alert("Something went wrong, you poop");
+    }
+  });
+}
 
 function Users() {
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
@@ -64,25 +73,36 @@ function Users() {
   const renderItem = ({ item }) => {
     return (
       <View
-            style={{
-              height: 50,
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text>User ID: {item.key}</Text>
-            <Text>User Name: {item.name}</Text>
-          </View>
+        style={{
+          height: 50,
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+
+        {/* <ListItem bottomDivider>
+            <ListItem.content>
+              {/* <ListItem.title>Hallo</ListItem.title> */}
+
+        {/* </ListItem.content>
+            /</ListItem> */}
+            <ListItem bottomDivider>
+              <ListItem.Title>{item.name}</ListItem.Title>
+              <ListItem.Subtitle>age: {item.age}</ListItem.Subtitle>
+              <ListItem.Subtitle>User ID: {item.key}</ListItem.Subtitle>
+              <ListItem.Chevron />
+            </ListItem>
+      </View>
     );
   };
 
-  
   return (
-      <FlatList
-        data={users}
-        renderItem={renderItem}
-      />
+    <View>
+      {" "}
+      <FlatList data={users} renderItem={renderItem} />{" "}
+      
+    </View>
   );
 }
 
