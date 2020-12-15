@@ -1,9 +1,9 @@
 import React, { Component, useEffect, useState } from "react";
 import {
   ActivityIndicator,
-  FlatList,
   Image,
   ImageBackground,
+  FlatList,
   Platform,
   SafeAreaView,
   StyleSheet,
@@ -24,6 +24,7 @@ import {
 } from "../config/utilities";
 import HelloWorld from "../components/TextArea/TextArea.component";
 import Header from "../components/Header/Header.component";
+//import tempData from "../config/tempData";
 
 // Initialize firebase
 import * as firebase from "firebase";
@@ -38,11 +39,19 @@ function Users() {
   const [users, setUsers] = useState([]); // Initial empty array of users
 
   useEffect(() => {
-    const subscriber = firestore()
-      .collection('characters')
-      .onSnapshot(() => {
-        // see next step
+    db.collection("Users").onSnapshot((querySnapshot) => {
+      const users = [];
+
+      querySnapshot.forEach((documentSnapshot) => {
+        users.push({
+          ...documentSnapshot.data(),
+          key: documentSnapshot.id,
+        });
       });
+
+      setUsers(users);
+      setLoading(false);
+    });
 
     // Unsubscribe from events when no longer in use
     return () => subscriber();
@@ -51,6 +60,88 @@ function Users() {
   if (loading) {
     return <ActivityIndicator />;
   }
+
+  return (
+      <FlatList
+        data={users}
+        renderItem={({ item }) => (
+          <View
+            style={{
+              height: 50,
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text>User ID: {item.key}</Text>
+            <Text>User Name: {item.name}</Text>
+          </View>
+        )}
+      />
+  );
+}
+
+const dataTemp = [
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "First Item",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Second Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Third Item",
+  },
+];
+const Item = ({ item, onPress, style }) => (
+  <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
+    <Text style={styles.title}>{item.title}</Text>
+  </TouchableOpacity>
+);
+function MusherOverviewScreen2() {
+  const [selectedId, setSelectedId] = useState(null);
+
+  const renderItem = ({ item }) => {
+    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
+
+    return (
+      <Item
+        item={item}
+        onPress={() => setSelectedId(item.id)}
+        style={{ backgroundColor }}
+      />
+    );
+  };
+
+  return (
+    <SafeAreaView styles={styles.container}>
+      <Text> Hello</Text>
+      {/* <Flatlist
+          data={tempData}
+          keyExtractor={(item) => item.name}
+          horizontal={true}
+          showHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <View>
+              {" "}
+              <Text>{item.name}</Text>
+            </View>
+          )}
+        /> */}
+      <Card>
+        <FlatList
+          data={dataTemp}
+          renderItem={renderItem}
+          showHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+        />
+        <Text> Hallo på do</Text>
+        <Users />
+      </Card>
+    </SafeAreaView>
+  );
 }
 
 function MusherOverviewScreen({ navigation }) {
@@ -96,7 +187,7 @@ function MusherOverviewScreen({ navigation }) {
         <Card.Title> Mushers overview</Card.Title>
         <Card.Divider />
         <Text> Here a list of mushers will be provided</Text>
-        <FlatList />
+        <Users />
       </Card>
     </SafeAreaView>
   );
@@ -157,7 +248,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MusherOverviewScreen;
+export default MusherOverviewScreen2;
 
 //This is a test
 db.collection("characters").doc("aaab").set({
