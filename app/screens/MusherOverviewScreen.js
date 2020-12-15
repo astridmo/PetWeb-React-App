@@ -1,5 +1,7 @@
-import React from "react";
+import React, { Component, useEffect, useState } from "react";
 import {
+  ActivityIndicator,
+  FlatList,
   Image,
   ImageBackground,
   Platform,
@@ -14,6 +16,42 @@ import { Button, Card, SearchBar } from "react-native-elements";
 import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
+import {
+  navigationFunctions,
+  foo,
+  profileButton,
+  helloWorld,
+} from "../config/utilities";
+import HelloWorld from "../components/TextArea/TextArea.component";
+import Header from "../components/Header/Header.component";
+
+// Initialize firebase
+import * as firebase from "firebase";
+import { firebaseConfig } from "../config/firebaseConfig";
+if (firebase.apps.length == 0) {
+  firebase.initializeApp(firebaseConfig); // To not re-make the app every time we save
+}
+const db = firebase.firestore();
+
+function Users() {
+  const [loading, setLoading] = useState(true); // Set loading to true on component mount
+  const [users, setUsers] = useState([]); // Initial empty array of users
+
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('characters')
+      .onSnapshot(() => {
+        // see next step
+      });
+
+    // Unsubscribe from events when no longer in use
+    return () => subscriber();
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+}
 
 function MusherOverviewScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
@@ -28,8 +66,12 @@ function MusherOverviewScreen({ navigation }) {
     return navigation.navigate("ProfileScreen");
   }
 
+  console.log(foo());
+
   return (
     <SafeAreaView style={styles.container}>
+      <Header />
+      <HelloWorld />
       <View style={styles.fixToText}>
         <TouchableOpacity onPress={profileButton}>
           <Icon name="user" size={30} color={colors.black} />
@@ -52,12 +94,23 @@ function MusherOverviewScreen({ navigation }) {
       >
         <Button title="Dog overview" onPress={dogButton} />
         <Card.Title> Mushers overview</Card.Title>
-        <Card.Divider></Card.Divider>
+        <Card.Divider />
         <Text> Here a list of mushers will be provided</Text>
+        <FlatList />
       </Card>
     </SafeAreaView>
   );
 }
+
+db.collection("characters")
+  .get()
+  .then((querySnapshot) => {
+    console.log("Total documents: ", querySnapshot.size);
+
+    querySnapshot.forEach((documentSnapshot) => {
+      console.log("User ID: ", documentSnapshot.id, documentSnapshot.data());
+    });
+  });
 
 const styles = StyleSheet.create({
   //   card: {
@@ -105,3 +158,10 @@ const styles = StyleSheet.create({
 });
 
 export default MusherOverviewScreen;
+
+//This is a test
+db.collection("characters").doc("aaab").set({
+  employment: "gorilla",
+  outfitColor: "brown",
+  specialAttack: "fireball",
+});
