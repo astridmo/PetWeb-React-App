@@ -55,12 +55,13 @@ function App() {
   return (
     <NavigationContainer>
       <Root.Navigator>
-        <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
-        <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
         <Root.Screen
           name="MusherOverviewScreen"
           component={MusherOverviewScreen}
         />
+
+        <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
 
         <Root.Screen name="LoginScreen" component={LogInScreen} />
 

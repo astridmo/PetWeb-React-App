@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Card, SearchBar } from "react-native-elements";
+import { Button, Card, ListItem, SearchBar } from "react-native-elements";
 
 import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -61,11 +61,9 @@ function Users() {
     return <ActivityIndicator />;
   }
 
-  return (
-      <FlatList
-        data={users}
-        renderItem={({ item }) => (
-          <View
+  const renderItem = ({ item }) => {
+    return (
+      <View
             style={{
               height: 50,
               flex: 1,
@@ -76,7 +74,14 @@ function Users() {
             <Text>User ID: {item.key}</Text>
             <Text>User Name: {item.name}</Text>
           </View>
-        )}
+    );
+  };
+
+  
+  return (
+      <FlatList
+        data={users}
+        renderItem={renderItem}
       />
   );
 }
