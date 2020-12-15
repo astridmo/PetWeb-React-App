@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {
   Image,
   ImageBackground,
@@ -10,14 +10,26 @@ import {
   View,
 } from "react-native";
 import { Button, Card, SearchBar } from "react-native-elements";
-import * as firebase from "firebase";
 
 import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
-import { navigationFunctions, foo, profileButton, helloWorld } from "../config/utilities";
-import HelloWorld from '../components/TextArea/TextArea.component';
-import Header from '../components/Header/Header.component';
+import {
+  navigationFunctions,
+  foo,
+  profileButton,
+  helloWorld,
+} from "../config/utilities";
+import HelloWorld from "../components/TextArea/TextArea.component";
+import Header from "../components/Header/Header.component";
+
+// Initialize firebase
+import * as firebase from "firebase";
+import { firebaseConfig } from "../config/firebaseConfig";
+if (firebase.apps.length == 0) {
+  firebase.initializeApp(firebaseConfig); // To not re-make the app every time we save
+}
+const db = firebase.firestore();
 
 function MusherOverviewScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
@@ -37,7 +49,7 @@ function MusherOverviewScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <HelloWorld/>
+      <HelloWorld />
       <View style={styles.fixToText}>
         <TouchableOpacity onPress={profileButton}>
           <Icon name="user" size={30} color={colors.black} />
@@ -66,6 +78,16 @@ function MusherOverviewScreen({ navigation }) {
     </SafeAreaView>
   );
 }
+
+db.collection("characters")
+  .get()
+  .then((querySnapshot) => {
+    console.log("Total documents: ", querySnapshot.size);
+
+    querySnapshot.forEach((documentSnapshot) => {
+      console.log("User ID: ", documentSnapshot.id, documentSnapshot.data());
+    });
+  });
 
 const styles = StyleSheet.create({
   //   card: {
@@ -115,8 +137,8 @@ const styles = StyleSheet.create({
 export default MusherOverviewScreen;
 
 //This is a test
-// dbh.collection("characters").doc("donkeykong").set({
-//   employment: "gorilla",
-//   outfitColor: "brown",
-//   specialAttack: "fireball"
-// })
+db.collection("characters").doc("aaab").set({
+  employment: "gorilla",
+  outfitColor: "brown",
+  specialAttack: "fireball",
+});

@@ -1,3 +1,4 @@
+// @refresh reset
 import { StatusBar } from "expo-status-bar";
 // Optionally import the services that you want to use
 //import "firebase/auth";
@@ -18,7 +19,9 @@ import {
   Alert,
   Button,
   Platform,
+  YellowBox,
 } from "react-native";
+import { firebaseConfig } from "./app/config/firebaseConfig";
 import Home from "./app/components/Home/Home.component";
 
 import DogOverviewScreen from "./app/screens/DogOverviewScreen";
@@ -34,6 +37,11 @@ import Icon from "react-native-vector-icons/AntDesign";
 //import { useDimensions } from "@react-native-community/hooks"; //Cannot find this file. Why??
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
+if (firebase.apps.length == 0) {
+  firebase.initializeApp(firebaseConfig); // To not re-make the app every time we save
+}
+YellowBox.ignoreWarnings(["Setting a timer for a long period of time"]); //This warning is not possible to solve at android atm
 
 const Root = createStackNavigator();
 
@@ -161,17 +169,16 @@ const styles = StyleSheet.create({
 });
 
 // Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyAziPMTe8PTWoTV6_Mxn42WUkm5QKP-a1s",
-  authDomain: "petweb-react-app.firebaseapp.com",
-  databaseURL: "https://petweb-react-app.firebaseio.com",
-  projectId: "petweb-react-app",
-  storageBucket: "petweb-react-app.appspot.com",
-  messagingSenderId: "157695855727",
-  appId: "1:157695855727:web:4157709348e32028d6519a",
-  measurementId: "G-J3HG884W4N",
-};
-firebase.initializeApp(firebaseConfig);
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAziPMTe8PTWoTV6_Mxn42WUkm5QKP-a1s",
+//   authDomain: "petweb-react-app.firebaseapp.com",
+//   databaseURL: "https://petweb-react-app.firebaseio.com",
+//   projectId: "petweb-react-app",
+//   storageBucket: "petweb-react-app.appspot.com",
+//   messagingSenderId: "157695855727",
+//   appId: "1:157695855727:web:4157709348e32028d6519a",
+//   measurementId: "G-J3HG884W4N",
+// };
 
 const dbh = firebase.firestore();
 
@@ -182,10 +189,8 @@ dbh.collection("characters").doc("mario").set({
   specialAttack: "fireball",
 });
 //Test
-dbh.collection("characters").doc("kose").set({
+dbh.collection("characters").doc("bajs").set({
   employment: "dog",
   outfitColor: "brown",
   specialAttack: "fireball",
 });
-
-//Hett
