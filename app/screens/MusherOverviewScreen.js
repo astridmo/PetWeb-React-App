@@ -18,6 +18,7 @@ import {
   ListItem,
   SearchBar,
 } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -54,22 +55,25 @@ function Users() {
   const [users, setUsers] = useState([]); // Initial empty array of users
 
   useEffect(() => {
-    db.collection("Users").onSnapshot((querySnapshot) => {
-      const users = [];
+    const db = firebase
+      .firestore()
+      .collection("Users")
+      .onSnapshot((querySnapshot) => {
+        const users = [];
 
-      querySnapshot.forEach((documentSnapshot) => {
-        users.push({
-          ...documentSnapshot.data(),
-          key: documentSnapshot.id,
+        querySnapshot.forEach((documentSnapshot) => {
+          users.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
         });
+
+        setUsers(users);
+        setLoading(false);
       });
 
-      setUsers(users);
-      setLoading(false);
-    });
-
     // Unsubscribe from events when no longer in use
-    return () => subscriber();
+    return () => db();
   }, []);
 
   if (loading) {
@@ -111,6 +115,88 @@ function Users() {
   );
 }
 
+function Mushers() {
+  const [loading, setLoading] = useState(true); // Set loading to true on component mount
+  const [mushers, setMushers] = useState([]); // Initial empty array of users
+  const navigation = useNavigation();
+
+  // function goToMusher() {
+  //   return navigation.navigate("MusherScreen", { musherId: 3 });
+  // }
+
+  useEffect(() => {
+    const db = firebase
+      .firestore()
+      .collection("Mushers")
+      .onSnapshot((querySnapshot) => {
+        const mushers = [];
+
+        querySnapshot.forEach((documentSnapshot) => {
+          mushers.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
+        });
+
+        setMushers(mushers);
+        setLoading(false);
+        console.log(mushers);
+      });
+
+    // Unsubscribe from events when no longer in use
+    return () => db();
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+
+  const renderItem = ({ item }) => {
+    function goToMusher() {
+      return navigation.navigate("MusherScreen", {
+        musherId: item.key,
+        musherName: item.firstname,
+        musherSurname: item.surname,
+      });
+    }
+
+    return (
+      <TouchableOpacity
+        style={{
+          height: 50,
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        onPress={goToMusher}
+      >
+        {/* <ListItem bottomDivider>
+            <ListItem.content>
+              {/* <ListItem.title>Hallo</ListItem.title> */}
+
+        {/* </ListItem.content>
+            /</ListItem> */}
+        <ListItem bottomDivider>
+          <ListItem.Title>
+            {item.firstname} {item.surname}
+          </ListItem.Title>
+          <ListItem.Subtitle>age: {item.surname}</ListItem.Subtitle>
+          <ListItem.Subtitle>User ID: {item.key}</ListItem.Subtitle>
+          <ListItem.Chevron />
+        </ListItem>
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <View>
+      <Text>
+        <FlatList data={mushers} renderItem={renderItem} />
+      </Text>
+    </View>
+  );
+}
+
 const dataTemp = [
   {
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -130,49 +216,6 @@ const Item = ({ item, onPress, style }) => (
     <Text style={styles.title}>{item.title}</Text>
   </TouchableOpacity>
 );
-function MusherOverviewScreen2() {
-  const [selectedId, setSelectedId] = useState(null);
-
-  const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
-
-    return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id)}
-        style={{ backgroundColor }}
-      />
-    );
-  };
-
-  return (
-    <SafeAreaView styles={styles.container}>
-      <Text> Hello</Text>
-      {/* <Flatlist
-          data={tempData}
-          keyExtractor={(item) => item.name}
-          horizontal={true}
-          showHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <View>
-              {" "}
-              <Text>{item.name}</Text>
-            </View>
-          )}
-        /> */}
-      <Card>
-        <FlatList
-          data={dataTemp}
-          renderItem={renderItem}
-          showHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-        />
-        <Text> Hallo på do</Text>
-        {/* <Users />  */}
-      </Card>
-    </SafeAreaView>
-  );
-}
 
 function MusherOverviewScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
@@ -225,7 +268,9 @@ function MusherOverviewScreen({ navigation }) {
         </View>
 
         <Card.Divider />
-        <Users />
+        <View style={styles.list}>
+          <Mushers />
+        </View>
       </Card>
     </SafeAreaView>
   );
@@ -274,6 +319,11 @@ const styles = StyleSheet.create({
     flexDirection: "row-reverse",
     //justifyContent: "space-between",
     alignItems: "flex-end",
+  },
+  list: {
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    flex: 1,
   },
   separator: {
     marginVertical: 8,
