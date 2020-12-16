@@ -3,5 +3,6 @@ export default {
     secondary: "#DEBC79",
     black: "rgb(0,0,0)",
     logo: "#215762",
-    white: "#FFFFFF"
+    white: "#FFFFFF",
+    background: "#ECF8F9",
 }

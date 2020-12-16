@@ -11,6 +11,7 @@ import React, { Component } from "react";
 import {
   Dimensions,
   Image,
+  LogBox,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -19,9 +20,8 @@ import {
   Alert,
   Button,
   Platform,
-  YellowBox,
 } from "react-native";
-import { firebaseConfig } from "./app/config/firebaseConfig";
+import {firebaseConfig} from "./app/config/Fire";
 import Home from "./app/components/Home/Home.component";
 
 import DogOverviewScreen from "./app/screens/DogOverviewScreen";
@@ -41,8 +41,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 if (firebase.apps.length == 0) {
   firebase.initializeApp(firebaseConfig); // To not re-make the app every time we save
 }
-YellowBox.ignoreWarnings(["Setting a timer for a long period of time"]); //This warning is not possible to solve at android atm
-
+if (Platform.OS === "android") {
+  LogBox.ignoreLogs(["Setting a timer"]); //This warning is not possible to solve at android atm
+}
 const Root = createStackNavigator();
 
 class NoteTaker extends Component {
@@ -55,12 +56,13 @@ function App() {
   return (
     <NavigationContainer>
       <Root.Navigator>
-        <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
-        <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
         <Root.Screen
           name="MusherOverviewScreen"
           component={MusherOverviewScreen}
         />
+
+        <Root.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
 
         <Root.Screen name="LoginScreen" component={LogInScreen} />
 
