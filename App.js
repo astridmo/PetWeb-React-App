@@ -21,16 +21,19 @@ import {
   Button,
   Platform,
 } from "react-native";
-import {firebaseConfig} from "./app/config/Fire";
+import { firebaseConfig } from "./app/config/Fire";
 import Home from "./app/components/Home/Home.component";
 
 import DogOverviewScreen from "./app/screens/DogOverviewScreen";
 import LogInScreen from "./app/screens/LogInScreen";
 import MusherOverviewScreen from "./app/screens/MusherOverviewScreen";
+import MusherScreen from "./app/screens/MusherScreen";
 import OrganizerScreen from "./app/screens/OrganizerScreen";
 import ParticipantScreen from "./app/screens/ParticipantScreen";
 import ProfileScreen from "./app/screens/ProfileScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
+
+import handleLogOut from "./app/config/handleLogOut";
 
 import Icon from "react-native-vector-icons/AntDesign";
 
@@ -69,6 +72,8 @@ function App() {
         <Root.Screen name="DogOverviewScreen" component={DogOverviewScreen} />
         <Root.Screen name="ProfileScreen" component={ProfileScreen} />
         <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
+        {/* <Root.Screen name="handleLogOut" component={handleLogOut} /> */}
+        <Root.Screen name="MusherScreen" component={MusherScreen} />
       </Root.Navigator>
     </NavigationContainer>
   );
