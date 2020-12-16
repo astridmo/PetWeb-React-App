@@ -25,7 +25,7 @@ const db = firebase.firestore();
 function MusherScreen({ route, navigation }) {
   const { musherId, musherName, musherSurname } = route.params;
   function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
+    return navigation.navigate("Home");
   }
   function profileButton() {
     return navigation.navigate("ProfileScreen");

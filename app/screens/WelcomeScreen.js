@@ -30,13 +30,11 @@ function WelcomeScreen({ props, navigation, route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground //Adding the background of the page
-        style={styles.background}
-        source={{
+         <Image style={styles.background} source={{
           uri:
             "https://nordnorge.com/content/uploads/2019/12/004317_GEIR-STIAN-A-LARSEN_www.finnmarkslopet.no_-1.jpg",
-        }}
-      ></ImageBackground>
+        }} />
+        
       <View style={styles.logoContainer}>
         <Text style={styles.title}>PETWEB</Text>
         <Image
@@ -45,6 +43,7 @@ function WelcomeScreen({ props, navigation, route }) {
         />
         <Text>Enjoy the race</Text>
       </View>
+   
 
       <TouchableOpacity style={styles.loginButton} onPress={goToLogIn}>
         <Text> Login </Text>
@@ -61,7 +60,6 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    opacity: 0.5,
     alignItems: "center",
     justifyContent: "flex-end",
   },

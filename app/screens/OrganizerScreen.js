@@ -12,13 +12,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, SearchBar } from "react-native-elements";
+import { Button, Card, SearchBar } from "react-native-elements";
 
 import App from "../../App.js";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/AntDesign";
 import MusherOverviewScreen from "./MusherOverviewScreen";
-import ProfileScreen from './ProfileScreen'
+import ProfileScreen from "./ProfileScreen";
 
 function OrganizerScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
@@ -30,19 +30,15 @@ function OrganizerScreen({ navigation }) {
   }
 
   function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
+    return navigation.navigate("Home");
   }
 
   function profileButton() {
-    return navigation.navigate("ProfileScreen")
+    return navigation.navigate("ProfileScreen");
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* //<ImageBackground //Adding the background of the page
-      // style={styles.background}
-      // source={require("../assets/background2.jpg")}
-      ></ImageBackground> */}
       <View style={styles.fixToText}>
         <TouchableOpacity onPress={profileButton}>
           <Icon name="user" size={30} color={colors.black} />
@@ -54,38 +50,40 @@ function OrganizerScreen({ navigation }) {
         />
       </View>
 
-      <View style={styles.content}>
-        <View style={styles.squares}>
-          <Text style={styles.headerSquare}>Musher</Text>
-          <Separator />
-          <Text style={styles.textSquare}>
-            Search for musher to find the participant's dogs in the race
-          </Text>
-          <Text style={styles.textSquare}>or</Text>
-          <Text style={styles.textSquare}>
-            <TouchableOpacity onPress={musherButton}>
-              <Icon name="profile" size={30} color={colors.black} />
-            </TouchableOpacity>
-            See the overview of mushers here!
-          </Text>
-        </View>
-        <Separator />
-        <View style={styles.squares}>
-          <Text style={styles.headerSquare}>Dogs</Text>
-          <Separator />
-          <Text style={styles.textSquare}>
-            Search with chipnumber to find the dog's owner
-          </Text>
-          <Text style={styles.textSquare}>or</Text>
-          <Text style={styles.textSquare}>
-            <TouchableOpacity onPress={dogButton}>
-              <Icon name="profile" size={30} color={colors.black} />
-            </TouchableOpacity>
-            See the overview of dogs here!
-          </Text>
-        </View>
-        <Separator />
-      </View>
+      <Card>
+        <Card.Title>Mushers</Card.Title>
+        <Card.Divider />
+        <Text style={styles.textSquare}>
+          Search for musher to find the participant's dogs in the race
+        </Text>
+        <Text style={styles.textSquare}>or</Text>
+        <Text style={styles.textSquare}>
+          <TouchableOpacity onPress={musherButton}>
+            <Icon
+              name="profile"
+              size={30}
+              color={colors.black}
+              styles={{ alignSelf: "center" }}
+            />
+          </TouchableOpacity>
+          {"  "}See the overview of mushers here!
+        </Text>
+      </Card>
+
+      <Card>
+        <Card.Title>Dogs</Card.Title>
+        <Card.Divider />
+        <Text style={styles.textSquare}>
+          Search with chipnumber to find the dog's owner
+        </Text>
+        <Text style={styles.textSquare}>or</Text>
+        <Text style={styles.textSquare}>
+          <TouchableOpacity onPress={dogButton}>
+            <Icon name="profile" size={30} color={colors.black} />
+          </TouchableOpacity>
+          See the overview of dogs here!
+        </Text>
+      </Card>
 
       {/* <TouchableOpacity style={styles.logOutBtn} onPress={handleLogOut}>
         <Text> <Icon name="user" size={30} color="#900" /> Login </Text>
@@ -98,7 +96,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
   },
   content: {
     alignItems: "center",
@@ -111,20 +109,12 @@ const styles = StyleSheet.create({
   },
   fixToText: {
     flexDirection: "row-reverse",
-    justifyContent: "space-around",
     alignItems: "flex-end",
   },
   separator: {
     marginVertical: 8,
     borderBottomColor: "#737373",
     borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  squares: {
-    width: "50%",
-    // height: "50%",
-    flex: 1,
-    backgroundColor: colors.primary,
-    alignItems: "center",
   },
   textSquare: {
     color: "#737373",

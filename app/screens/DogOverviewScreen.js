@@ -60,7 +60,7 @@ function DogOverviewScreen({ navigation }) {
             <Card.Title onPress={musherButton}> Musher overview </Card.Title>
           </TouchableOpacity>
         </View>
-        <Card.Divider></Card.Divider>
+        <Card.Divider />
         <Text> Here a list of dogs will be provided</Text>
       </Card>
     </SafeAreaView>
@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
   },
   fixToText: {
     flexDirection: "row-reverse",
-    justifyContent: "space-around",
     alignItems: "flex-end",
   },
   separator: {

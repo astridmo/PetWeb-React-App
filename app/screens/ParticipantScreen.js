@@ -24,7 +24,7 @@ function ParticipantScreen({ navigation, props, route }) {
   // }
 
   function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
+    return navigation.navigate("Home");
   }
 
   {

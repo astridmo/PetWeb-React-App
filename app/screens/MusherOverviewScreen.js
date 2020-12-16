@@ -50,79 +50,10 @@ function componentDidMount() {
   });
 }
 
-function Users() {
-  const [loading, setLoading] = useState(true); // Set loading to true on component mount
-  const [users, setUsers] = useState([]); // Initial empty array of users
-
-  useEffect(() => {
-    const db = firebase
-      .firestore()
-      .collection("Users")
-      .onSnapshot((querySnapshot) => {
-        const users = [];
-
-        querySnapshot.forEach((documentSnapshot) => {
-          users.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
-        setUsers(users);
-        setLoading(false);
-      });
-
-    // Unsubscribe from events when no longer in use
-    return () => db();
-  }, []);
-
-  if (loading) {
-    return <ActivityIndicator />;
-  }
-
-  const renderItem = ({ item }) => {
-    return (
-      <View
-        style={{
-          height: 50,
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {/* <ListItem bottomDivider>
-            <ListItem.content>
-              {/* <ListItem.title>Hallo</ListItem.title> */}
-
-        {/* </ListItem.content>
-            /</ListItem> */}
-        <ListItem bottomDivider>
-          <ListItem.Title>{item.name}</ListItem.Title>
-          <ListItem.Subtitle>age: {item.age}</ListItem.Subtitle>
-          <ListItem.Subtitle>User ID: {item.key}</ListItem.Subtitle>
-          <ListItem.Chevron />
-        </ListItem>
-      </View>
-    );
-  };
-
-  return (
-    <View>
-      <Text>
-        <FlatList data={users} renderItem={renderItem} />
-      </Text>
-    </View>
-  );
-}
-
 function Mushers() {
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
   const [mushers, setMushers] = useState([]); // Initial empty array of users
   const navigation = useNavigation();
-
-  // function goToMusher() {
-  //   return navigation.navigate("MusherScreen", { musherId: 3 });
-  // }
 
   useEffect(() => {
     const db = firebase
@@ -170,28 +101,24 @@ function Mushers() {
         }}
         onPress={goToMusher}
       >
-        {/* <ListItem bottomDivider>
-            <ListItem.content>
-              {/* <ListItem.title>Hallo</ListItem.title> */}
-
-        {/* </ListItem.content>
-            /</ListItem> */}
-        <ListItem bottomDivider>
-          <ListItem.Title>
-            {item.firstname} {item.surname}
-          </ListItem.Title>
-          <ListItem.Subtitle>age: {item.surname}</ListItem.Subtitle>
-          <ListItem.Subtitle>User ID: {item.key}</ListItem.Subtitle>
-          <ListItem.Chevron />
+        <ListItem bottomDivider style={styles.list}>
+          <ListItem.Content>
+            <ListItem.Title>
+              {item.firstname} {item.surname}                  
+            </ListItem.Title>
+          </ListItem.Content>
+          <View styles={{ alignSelf: "flex-end"}}>
+            <ListItem.Chevron />
+          </View>
         </ListItem>
       </TouchableOpacity>
     );
   };
 
   return (
-    <View>
-      <Text>
-        <FlatList data={mushers} renderItem={renderItem} />
+    <View styles={{width:"100%"}}>
+      <Text styles={{width:"100%"}}>
+        <FlatList data={mushers} renderItem={renderItem}/>
       </Text>
     </View>
   );
@@ -218,10 +145,8 @@ const Item = ({ item, onPress, style }) => (
 );
 
 function MusherOverviewScreen({ navigation }) {
-  const Separator = () => <View style={styles.separator} />;
-
   function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
+    return navigation.navigate("Home");
   }
   function dogButton() {
     return navigation.navigate("DogOverviewScreen");
@@ -249,7 +174,7 @@ function MusherOverviewScreen({ navigation }) {
 
       <Card
         containerStyle={{
-          alignItems: "center",
+          alignItems: "flex-start",
           alignSelf: "center",
         }}
       >
@@ -268,32 +193,13 @@ function MusherOverviewScreen({ navigation }) {
         </View>
 
         <Card.Divider />
-        <View style={styles.list}>
-          <Mushers />
-        </View>
+        <Mushers />
       </Card>
     </SafeAreaView>
   );
 }
 
-db.collection("characters")
-  .get()
-  .then((querySnapshot) => {
-    console.log("Total documents: ", querySnapshot.size);
-
-    querySnapshot.forEach((documentSnapshot) => {
-      console.log("User ID: ", documentSnapshot.id, documentSnapshot.data());
-    });
-  });
-
 const styles = StyleSheet.create({
-  //   card: {
-  //     backgroundColor: colors.primary,
-  //     flex: 0.8,
-  //     width: "80%",
-  //     alignItems: "center",
-  //     alignSelf: "center",
-  //   },
   cardTitle: {
     flexDirection: "row",
     width: "100%",
@@ -321,14 +227,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   list: {
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    flex: 1,
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: "#737373",
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    alignSelf: "flex-start",
   },
   squares: {
     width: "80%",

@@ -7,7 +7,7 @@ import colors from "../config/colors";
 
 function ProfileScreen({navigation}) {
   function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
+    return navigation.navigate("Home");
   }
 
   return (
