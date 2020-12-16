@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
+  FlatList,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Card, SearchBar } from "react-native-elements";
+import { Button, Card, SearchBar, ListItem } from "react-native-elements";
 
 import App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -21,7 +23,7 @@ if (firebase.apps.length == 0) {
 const db = firebase.firestore();
 
 function MusherScreen({ route, navigation }) {
-  const { musherId } = route.params;
+  const { musherId, musherName, musherSurname } = route.params;
   function handleLogOut() {
     return navigation.navigate("WelcomeScreen");
   }
@@ -35,20 +37,6 @@ function MusherScreen({ route, navigation }) {
   // Getting data from firestore
   db.collection("Mushers")
     .doc(musherId)
-    .get()
-    .then(function (doc) {
-      if (doc.exists) {
-        console.log("Document data:", doc.data());
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    })
-    .catch(function (error) {
-      console.log("Error getting document:", error);
-    });
-  db.collection("Mushers")
-    .doc(musherId)
     .collection("Dogs")
     .get()
     .then(function (querySnapshot) {
@@ -57,6 +45,55 @@ function MusherScreen({ route, navigation }) {
         console.log(doc.id, " => ", doc.data());
       });
     });
+
+  const [loading, setLoading] = useState(true); // Set loading to true on component mount
+  const [dogs, setDogs] = useState([]); // Initial empty array of dogs
+  useEffect(() => {
+    const db = firebase
+      .firestore()
+      .collection("Mushers")
+      .doc(musherId)
+      .collection("Dogs")
+      .onSnapshot((querySnapshot) => {
+        const dogs = [];
+        querySnapshot.forEach((documentSnapshot) => {
+          dogs.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
+          // doc.data() is never undefined for query doc snapshots
+          console.log(documentSnapshot.id, " => ", documentSnapshot.data());
+        });
+        setDogs(dogs);
+        setLoading(false);
+      });
+    console.log("Alle hunder2:", dogs);
+    // Unsubscribe from events when no longer in use
+    return () => db();
+  }, []);
+  console.log("Alle hunder3:", dogs);
+
+  const renderItem = ({ item }) => {
+    if (loading) {
+      return <ActivityIndicator />;
+    }
+    return (
+      <View
+        style={{
+          height: 50,
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <ListItem bottomDivider>
+          <ListItem.Title>{item.dogname}</ListItem.Title>
+          <ListItem.Subtitle>Chipnr: {item.key}</ListItem.Subtitle>
+          <ListItem.Chevron />
+        </ListItem>
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -80,13 +117,24 @@ function MusherScreen({ route, navigation }) {
         <View style={styles.cardTitle}>
           <View style={{ flex: 1 }}>
             <Text> </Text>
-            <Card.Title> Choosen Musher</Card.Title>
+            <Card.Title>
+              {" "}
+              {musherName} {musherSurname}{" "}
+            </Card.Title>
           </View>
           <Card.Divider />
         </View>
         <Card.Divider></Card.Divider>
         <Text> Information about chosen musher</Text>
         <Text>musherId: {JSON.stringify(musherId)}</Text>
+        <Text>musherName: {JSON.stringify(musherName)}</Text>
+        <Card.Divider />
+
+        <View>
+          <Text>
+            <FlatList data={dogs} renderItem={renderItem} />
+          </Text>
+        </View>
       </Card>
     </SafeAreaView>
   );

@@ -55,22 +55,25 @@ function Users() {
   const [users, setUsers] = useState([]); // Initial empty array of users
 
   useEffect(() => {
-    db.collection("Users").onSnapshot((querySnapshot) => {
-      const users = [];
+    const db = firebase
+      .firestore()
+      .collection("Users")
+      .onSnapshot((querySnapshot) => {
+        const users = [];
 
-      querySnapshot.forEach((documentSnapshot) => {
-        users.push({
-          ...documentSnapshot.data(),
-          key: documentSnapshot.id,
+        querySnapshot.forEach((documentSnapshot) => {
+          users.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
         });
+
+        setUsers(users);
+        setLoading(false);
       });
 
-      setUsers(users);
-      setLoading(false);
-    });
-
     // Unsubscribe from events when no longer in use
-    return () => subscriber();
+    return () => db();
   }, []);
 
   if (loading) {
@@ -122,23 +125,26 @@ function Mushers() {
   // }
 
   useEffect(() => {
-    db.collection("Mushers").onSnapshot((querySnapshot) => {
-      const mushers = [];
+    const db = firebase
+      .firestore()
+      .collection("Mushers")
+      .onSnapshot((querySnapshot) => {
+        const mushers = [];
 
-      querySnapshot.forEach((documentSnapshot) => {
-        mushers.push({
-          ...documentSnapshot.data(),
-          key: documentSnapshot.id,
+        querySnapshot.forEach((documentSnapshot) => {
+          mushers.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
         });
+
+        setMushers(mushers);
+        setLoading(false);
+        console.log(mushers);
       });
 
-      setMushers(mushers);
-      setLoading(false);
-      console.log(mushers);
-    });
-
     // Unsubscribe from events when no longer in use
-    return () => subscriber();
+    return () => db();
   }, []);
 
   if (loading) {
@@ -147,7 +153,11 @@ function Mushers() {
 
   const renderItem = ({ item }) => {
     function goToMusher() {
-      return navigation.navigate("MusherScreen", { musherId: item.key});
+      return navigation.navigate("MusherScreen", {
+        musherId: item.key,
+        musherName: item.firstname,
+        musherSurname: item.surname,
+      });
     }
 
     return (
@@ -167,8 +177,9 @@ function Mushers() {
         {/* </ListItem.content>
             /</ListItem> */}
         <ListItem bottomDivider>
-          <ListItem.Title>{item.firstname}</ListItem.Title>
-          <ListItem.Title>{item.surname}</ListItem.Title>
+          <ListItem.Title>
+            {item.firstname} {item.surname}
+          </ListItem.Title>
           <ListItem.Subtitle>age: {item.surname}</ListItem.Subtitle>
           <ListItem.Subtitle>User ID: {item.key}</ListItem.Subtitle>
           <ListItem.Chevron />
@@ -205,49 +216,6 @@ const Item = ({ item, onPress, style }) => (
     <Text style={styles.title}>{item.title}</Text>
   </TouchableOpacity>
 );
-function MusherOverviewScreen2() {
-  const [selectedId, setSelectedId] = useState(null);
-
-  const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
-
-    return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id)}
-        style={{ backgroundColor }}
-      />
-    );
-  };
-
-  return (
-    <SafeAreaView styles={styles.container}>
-      <Text> Hello</Text>
-      {/* <Flatlist
-          data={tempData}
-          keyExtractor={(item) => item.name}
-          horizontal={true}
-          showHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <View>
-              {" "}
-              <Text>{item.name}</Text>
-            </View>
-          )}
-        /> */}
-      <Card>
-        <FlatList
-          data={dataTemp}
-          renderItem={renderItem}
-          showHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-        />
-        <Text> Hallo på do</Text>
-        {/* <Users />  */}
-      </Card>
-    </SafeAreaView>
-  );
-}
 
 function MusherOverviewScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
@@ -301,7 +269,6 @@ function MusherOverviewScreen({ navigation }) {
 
         <Card.Divider />
         <View style={styles.list}>
-          <Users />
           <Mushers />
         </View>
       </Card>
