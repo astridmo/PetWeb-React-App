@@ -104,8 +104,9 @@ function Users() {
 
   return (
     <View>
-      {" "}
-      <FlatList data={users} renderItem={renderItem} />{" "}
+      <Text>
+        <FlatList data={users} renderItem={renderItem} />
+      </Text>
     </View>
   );
 }
@@ -167,7 +168,7 @@ function MusherOverviewScreen2() {
           keyExtractor={(item) => item.id}
         />
         <Text> Hallo på do</Text>
-        <Users />
+        {/* <Users />  */}
       </Card>
     </SafeAreaView>
   );
