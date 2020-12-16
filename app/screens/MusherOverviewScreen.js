@@ -18,7 +18,7 @@ import {
   ListItem,
   SearchBar,
 } from "react-native-elements";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -117,9 +117,9 @@ function Mushers() {
   const [mushers, setMushers] = useState([]); // Initial empty array of users
   const navigation = useNavigation();
 
-  function goToMusher() {
-    return navigation.navigate("MusherScreen");
-  }
+  // function goToMusher() {
+  //   return navigation.navigate("MusherScreen", { musherId: 3 });
+  // }
 
   useEffect(() => {
     db.collection("Mushers").onSnapshot((querySnapshot) => {
@@ -145,11 +145,10 @@ function Mushers() {
     return <ActivityIndicator />;
   }
 
-  const renderItem = ({ item, navigation }) => {
-
-    // function goToMusher() {
-    //   return navigation.navigate("DogOverviewScreen");
-    // }
+  const renderItem = ({ item }) => {
+    function goToMusher() {
+      return navigation.navigate("MusherScreen", { musherId: item.key});
+    }
 
     return (
       <TouchableOpacity
