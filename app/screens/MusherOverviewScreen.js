@@ -14,7 +14,6 @@ import {
 import {
   Button,
   Card,
-  Header,
   ListItem,
   SearchBar,
 } from "react-native-elements";
@@ -29,8 +28,6 @@ import {
   profileButton,
   helloWorld,
 } from "../config/utilities";
-import HelloWorld from "../components/TextArea/TextArea.component";
-import TopHeader from "../components/Header/Header.component";
 //import MusherList from "../components/MusherList";
 //import tempData from "../config/tempData";
 import MyHeader from "../components/MyHeader"

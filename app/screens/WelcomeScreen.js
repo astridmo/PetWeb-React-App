@@ -4,17 +4,14 @@
 import React, { useState } from "react";
 import {
   Image,
-  ImageBackground,
   Platform,
   SafeAreaView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Input } from "react-native-elements";
+import { Button, Input, Tooltip } from "react-native-elements";
 
-import App from "../../App.js";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/AntDesign";
 
@@ -29,7 +26,9 @@ function WelcomeScreen({ props, navigation, route }) {
     if (password == "GodJul") {
       return navigation.push("OrganizerScreen");
     }
-    return alert("Wrong password!");
+    return alert(
+      "Wrong password! Click 'Forgot Password?' to see secret password:)"
+    );
   }
 
   return (
@@ -38,23 +37,41 @@ function WelcomeScreen({ props, navigation, route }) {
           uri:
             "https://nordnorge.com/content/uploads/2019/12/004317_GEIR-STIAN-A-LARSEN_www.finnmarkslopet.no_-1.jpg",
         }} /> */}
+      <Text></Text>
+      <Text></Text>
 
-      <View style={styles.logoContainer}>
+      <View style={styles.content}>
         <Text style={styles.title}>PetWeb</Text>
         <Image style={styles.logo} source={require("../assets/dog_logo.jpg")} />
       </View>
+      {/* <View style={styles.logoContainer}>
+          {/* <Text style={styles.title}>PetWeb</Text> */}
+      {/* <Image
+            style={styles.logo}
+            source={require("../assets/dog_logo.jpg")}
+          />
+        </View>  */}
 
-      <View style={styles.content}>
-        <Input
-          placeholder="Password"
-          leftIcon={<Icon name="lock1" size={24} color="black" />}
-          onChangeText={(password) => {
-            setPassword(password);
-          }}
-          secureTextEntry={true}
-          label="Password"
-        />
-        <Button title="Login" onPress={handleLogIn} buttonStyle={{ backgroundColor: colors.primary }} />
+      <Input
+        placeholder="Password"
+        leftIcon={<Icon name="lock1" size={24} color="black" />}
+        onChangeText={(password) => {
+          setPassword(password);
+        }}
+        secureTextEntry={true}
+        label="Password"
+      />
+      <Button
+        title="Login"
+        onPress={handleLogIn}
+        buttonStyle={{ backgroundColor: colors.primary }}
+      />
+      <Tooltip popover={<Text>Password is: GodJul</Text>}>
+        <Text style={styles.forgot}>Forgot password ?</Text>
+      </Tooltip>
+
+      <View styles={{ flex: 1, flexDirection: "column" }}>
+        <Image style={styles.elves} source={require("../assets/elves.jpg")} />
       </View>
     </SafeAreaView>
   );
@@ -66,12 +83,28 @@ const styles = StyleSheet.create({
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
     backgroundColor: colors.white,
-  },
-  content: {
     alignSelf: "center",
     justifyContent: "center",
     flex: 1,
     width: "100%",
+  },
+  content: {
+    flex: 1,
+    alignSelf: "center",
+    justifyContent: "center",
+  },
+  elves: {
+    width: "100%",
+    resizeMode: "contain",
+    //height: "100%",
+
+    //height: undefined,
+    //height: 200,
+  },
+  forgot: {
+    alignSelf: "center",
+    color: colors.logo,
+    fontWeight: "bold",
   },
   input: {
     alignSelf: "center",
@@ -80,6 +113,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
+    alignSelf: "center",
   },
   logoContainer: {
     position: "absolute",
@@ -90,6 +124,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 50,
     alignItems: "center",
+    alignSelf: "center",
     color: colors.logo,
   },
 });

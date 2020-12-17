@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Card, SearchBar, Header } from "react-native-elements";
+import { Button, Card, SearchBar, } from "react-native-elements";
 
 import App from "../../App.js";
 import colors from "../config/colors";

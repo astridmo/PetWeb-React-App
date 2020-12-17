@@ -80,17 +80,17 @@ function App() {
           component={LogInScreen}
           options={{ headerShown: false }}
         />
-
-        <Root.Screen
-          name="DogOverviewScreen"
-          component={DogOverviewScreen}
-          options={{ headerShown: false }}
-        />
         <Root.Screen
           name="ProfileScreen"
           component={ProfileScreen}
           options={{ headerShown: false }}
         />
+        <Root.Screen
+          name="DogOverviewScreen"
+          component={DogOverviewScreen}
+          options={{ headerShown: false }}
+        />
+
         <Root.Screen
           name="ParticipantScreen"
           component={ParticipantScreen}

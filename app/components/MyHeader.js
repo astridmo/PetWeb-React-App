@@ -9,7 +9,7 @@ import colors from "../config/colors";
 function MyHeader() {
   const navigation = useNavigation();
   function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
+    return navigation.push("WelcomeScreen");
   }
   function profileButton() {
     return navigation.navigate("ProfileScreen");
@@ -33,7 +33,7 @@ function MyHeader() {
       }
       centerComponent={
         <TouchableOpacity>
-          <Text onPress={handleLogOut} style={{ color: colors.header }}>
+          <Text onPress={handleLogOut} style={{ color: colors.logo }}>
             Log out
           </Text>
         </TouchableOpacity>
