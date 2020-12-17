@@ -19,12 +19,8 @@ function ParticipantScreen({ navigation, props, route }) {
   const [searchMusher, setSearchMusher] = useState("");
   const [searchDog, setSearchDog] = useState();
 
-  // const handleLogOut = () => {
-  //   navigation.navigate('WelcomeScreen')
-  // }
-
   function handleLogOut() {
-    return navigation.navigate("Home");
+    return navigation.navigate("WelcomeScreen");
   }
 
   {

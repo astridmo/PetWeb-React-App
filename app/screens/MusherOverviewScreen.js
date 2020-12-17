@@ -33,6 +33,7 @@ import HelloWorld from "../components/TextArea/TextArea.component";
 import TopHeader from "../components/Header/Header.component";
 //import MusherList from "../components/MusherList";
 //import tempData from "../config/tempData";
+import MyHeader from "../components/MyHeader"
 
 // Initialize firebase
 import * as firebase from "firebase";
@@ -104,10 +105,10 @@ function Mushers() {
         <ListItem bottomDivider style={styles.list}>
           <ListItem.Content>
             <ListItem.Title>
-              {item.firstname} {item.surname}                  
+              {item.firstname} {item.surname}
             </ListItem.Title>
           </ListItem.Content>
-          <View styles={{ alignSelf: "flex-end"}}>
+          <View styles={{ alignSelf: "flex-end" }}>
             <ListItem.Chevron />
           </View>
         </ListItem>
@@ -116,61 +117,24 @@ function Mushers() {
   };
 
   return (
-    <View styles={{width:"100%"}}>
-      <Text styles={{width:"100%"}}>
-        <FlatList data={mushers} renderItem={renderItem}/>
+    <View styles={{ width: "100%" }}>
+      <Text styles={{ width: "100%" }}>
+        <FlatList data={mushers} renderItem={renderItem} />
       </Text>
     </View>
   );
 }
 
-const dataTemp = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-];
-const Item = ({ item, onPress, style }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-    <Text style={styles.title}>{item.title}</Text>
-  </TouchableOpacity>
-);
 
 function MusherOverviewScreen({ navigation }) {
-  function handleLogOut() {
-    return navigation.navigate("Home");
-  }
   function dogButton() {
     return navigation.navigate("DogOverviewScreen");
   }
-  function profileButton() {
-    return navigation.navigate("ProfileScreen");
-  }
-
   console.log(foo());
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopHeader />
-      <HelloWorld />
-      <View style={styles.fixToText}>
-        <TouchableOpacity onPress={profileButton}>
-          <Icon name="user" size={30} color={colors.black} />
-        </TouchableOpacity>
-        <Button
-          buttonStyle={{ backgroundColor: colors.primary }}
-          onPress={handleLogOut}
-          title="Log out"
-        />
-      </View>
+      <MyHeader />
 
       <Card
         containerStyle={{

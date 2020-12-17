@@ -12,16 +12,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Card, SearchBar } from "react-native-elements";
+import { Button, Card, SearchBar, Header } from "react-native-elements";
 
 import App from "../../App.js";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/AntDesign";
-import MusherOverviewScreen from "./MusherOverviewScreen";
-import ProfileScreen from "./ProfileScreen";
+import MyHeader from "../components/MyHeader";
 
 function OrganizerScreen({ navigation }) {
-  const Separator = () => <View style={styles.separator} />;
   function dogButton() {
     return navigation.navigate("DogOverviewScreen");
   }
@@ -29,26 +27,9 @@ function OrganizerScreen({ navigation }) {
     return navigation.push("MusherOverviewScreen");
   }
 
-  function handleLogOut() {
-    return navigation.navigate("Home");
-  }
-
-  function profileButton() {
-    return navigation.navigate("ProfileScreen");
-  }
-
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.fixToText}>
-        <TouchableOpacity onPress={profileButton}>
-          <Icon name="user" size={30} color={colors.black} />
-        </TouchableOpacity>
-        <Button
-          buttonStyle={{ backgroundColor: colors.primary }}
-          onPress={handleLogOut}
-          title="Log out"
-        />
-      </View>
+      <MyHeader />
 
       <Card>
         <Card.Title>Mushers</Card.Title>
