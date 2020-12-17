@@ -26,7 +26,9 @@ function WelcomeScreen({ props, navigation, route }) {
     if (password == "GodJul") {
       return navigation.push("OrganizerScreen");
     }
-    return alert("Wrong password!");
+    return alert(
+      "Wrong password! Click 'Forgot Password?' to see secret password:)"
+    );
   }
 
   return (
