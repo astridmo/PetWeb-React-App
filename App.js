@@ -73,15 +73,40 @@ function App() {
         <Root.Screen
           name="MusherOverviewScreen"
           component={MusherOverviewScreen}
+          options={{ headerShown: false }}
         />
-        <Root.Screen name="LoginScreen" component={LogInScreen} />
+        <Root.Screen
+          name="LoginScreen"
+          component={LogInScreen}
+          options={{ headerShown: false }}
+        />
 
-        <Root.Screen name="DogOverviewScreen" component={DogOverviewScreen} />
-        <Root.Screen name="ProfileScreen" component={ProfileScreen} />
-        <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
+        <Root.Screen
+          name="DogOverviewScreen"
+          component={DogOverviewScreen}
+          options={{ headerShown: false }}
+        />
+        <Root.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+          options={{ headerShown: false }}
+        />
+        <Root.Screen
+          name="ParticipantScreen"
+          component={ParticipantScreen}
+          options={{ headerShown: false }}
+        />
         {/* <Root.Screen name="handleLogOut" component={handleLogOut} /> */}
-        <Root.Screen name="MusherScreen" component={MusherScreen} />
-        <Root.Screen name="Dog" component={DogScreen} />
+        <Root.Screen
+          name="MusherScreen"
+          component={MusherScreen}
+          options={{ headerShown: false }}
+        />
+        <Root.Screen
+          name="Dog"
+          component={DogScreen}
+          options={{ headerShown: false }}
+        />
       </Root.Navigator>
     </NavigationContainer>
   );

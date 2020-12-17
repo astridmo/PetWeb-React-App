@@ -20,13 +20,9 @@ function LogInScreen({ props, navigation, route }) {
   function handleLogIn() {
     console.log("The text is", password);
     if (password == "GodJul") {
-    return (
-      navigation.push("OrganizerScreen")
-    );
+      return navigation.push("OrganizerScreen");
     }
-    return (
-      alert("Wrong password!")
-    )
+    return alert("Wrong password!");
   }
 
   return (

@@ -14,6 +14,10 @@ function MyHeader() {
   function profileButton() {
     return navigation.navigate("ProfileScreen");
   }
+  function goBack() {
+    return navigation.goBack();
+  }
+
   return (
     <Header
       placement="right"
@@ -36,8 +40,7 @@ function MyHeader() {
       }
       leftComponent={
         <TouchableOpacity>
-          <Icon name="arrowleft" />
-          size={30}
+          <Icon name="arrowleft" size={30} onPress={goBack} />
         </TouchableOpacity>
       }
       containerStyle={{
