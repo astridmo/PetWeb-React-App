@@ -33,6 +33,7 @@ import HelloWorld from "../components/TextArea/TextArea.component";
 import TopHeader from "../components/Header/Header.component";
 //import MusherList from "../components/MusherList";
 //import tempData from "../config/tempData";
+import MyHeader from "../components/MyHeader"
 
 // Initialize firebase
 import * as firebase from "firebase";
@@ -49,6 +50,43 @@ function componentDidMount() {
     }
   });
 }
+
+// function MyHeader() {
+//   const navigation = useNavigation();
+//   function handleLogOut() {
+//     return navigation.navigate("WelcomeScreen");
+//   }
+//   function profileButton() {
+//     return navigation.navigate("ProfileScreen");
+//   }
+//   return (
+//     <Header
+//       placement="right"
+//       rightComponent={
+//         <TouchableOpacity>
+//           <Icon
+//             name="user"
+//             size={30}
+//             color={colors.black}
+//             onPress={profileButton}
+//           />
+//         </TouchableOpacity>
+//       }
+//       centerComponent={
+//         <TouchableOpacity>
+//           {" "}
+//           <Text onPress={handleLogOut} style={{ color: colors.header }}>
+//             Log out
+//           </Text>
+//         </TouchableOpacity>
+//       }
+//       containerStyle={{
+//         backgroundColor: colors.background,
+//         justifyContent: "space-around",
+//       }}
+//     />
+//   );
+// }
 
 function Mushers() {
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
@@ -104,10 +142,10 @@ function Mushers() {
         <ListItem bottomDivider style={styles.list}>
           <ListItem.Content>
             <ListItem.Title>
-              {item.firstname} {item.surname}                  
+              {item.firstname} {item.surname}
             </ListItem.Title>
           </ListItem.Content>
-          <View styles={{ alignSelf: "flex-end"}}>
+          <View styles={{ alignSelf: "flex-end" }}>
             <ListItem.Chevron />
           </View>
         </ListItem>
@@ -116,9 +154,9 @@ function Mushers() {
   };
 
   return (
-    <View styles={{width:"100%"}}>
-      <Text styles={{width:"100%"}}>
-        <FlatList data={mushers} renderItem={renderItem}/>
+    <View styles={{ width: "100%" }}>
+      <Text styles={{ width: "100%" }}>
+        <FlatList data={mushers} renderItem={renderItem} />
       </Text>
     </View>
   );
@@ -145,32 +183,16 @@ const Item = ({ item, onPress, style }) => (
 );
 
 function MusherOverviewScreen({ navigation }) {
-  function handleLogOut() {
-    return navigation.navigate("Home");
-  }
   function dogButton() {
     return navigation.navigate("DogOverviewScreen");
   }
-  function profileButton() {
-    return navigation.navigate("ProfileScreen");
-  }
-
   console.log(foo());
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopHeader />
+      <MyHeader />
       <HelloWorld />
-      <View style={styles.fixToText}>
-        <TouchableOpacity onPress={profileButton}>
-          <Icon name="user" size={30} color={colors.black} />
-        </TouchableOpacity>
-        <Button
-          buttonStyle={{ backgroundColor: colors.primary }}
-          onPress={handleLogOut}
-          title="Log out"
-        />
-      </View>
+     
 
       <Card
         containerStyle={{

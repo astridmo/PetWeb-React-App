@@ -14,6 +14,7 @@ import { Button, Card, SearchBar } from "react-native-elements";
 import App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
+import MyHeader from "../components/MyHeader"
 
 function DogOverviewScreen({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
@@ -30,6 +31,7 @@ function DogOverviewScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <MyHeader />
       <View style={styles.fixToText}>
         <TouchableOpacity onPress={profileButton}>
           <Icon name="user" size={30} color={colors.black} />

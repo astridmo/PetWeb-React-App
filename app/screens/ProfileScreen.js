@@ -4,26 +4,20 @@ import { Button, Card, SearchBar } from "react-native-elements";
 
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
+import MyHeader from "../components/MyHeader";
 
-function ProfileScreen({navigation}) {
+function ProfileScreen({ navigation }) {
   function handleLogOut() {
-    return navigation.navigate("Home");
+    return navigation.navigate("WelcomeScreen");
   }
 
   return (
     <SafeAreaView>
-      <View>
-        <Button
-          buttonStyle={{ backgroundColor: colors.primary }}
-          onPress={handleLogOut}
-          title="Log out"
-        />
-      </View>
+      <MyHeader />
 
       <Card>
-          <Card.Title>Profile overview</Card.Title>
-          <Card.Divider />
-
+        <Card.Title>Profile overview</Card.Title>
+        <Card.Divider />
       </Card>
     </SafeAreaView>
   );

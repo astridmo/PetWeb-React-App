@@ -13,6 +13,7 @@ import { Button, Card, SearchBar, ListItem } from "react-native-elements";
 import App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
+import MyHeader from "../components/MyHeader";
 
 // Initialize firebase
 import * as firebase from "firebase";
@@ -25,7 +26,7 @@ const db = firebase.firestore();
 function MusherScreen({ route, navigation }) {
   const { musherId, musherName, musherSurname } = route.params;
   function handleLogOut() {
-    return navigation.navigate("Home");
+    return navigation.navigate("WelcomeScreen");
   }
   function profileButton() {
     return navigation.navigate("ProfileScreen");
@@ -74,39 +75,39 @@ function MusherScreen({ route, navigation }) {
   console.log("Alle hunder3:", dogs);
 
   const renderItem = ({ item }) => {
+    function goToDog() {
+      return navigation.navigate("Dog", {
+        chipnr: item.key,
+        musherName: musherName,
+        musherSurname: musherSurname,
+        dogname: item.dogname,
+      });
+    }
     if (loading) {
       return <ActivityIndicator />;
     }
     return (
-      <View
+      <TouchableOpacity
         style={{
           height: 50,
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
         }}
+        onPress={goToDog}
       >
         <ListItem bottomDivider>
           <ListItem.Title>{item.dogname}</ListItem.Title>
           <ListItem.Subtitle>Chipnr: {item.key}</ListItem.Subtitle>
           <ListItem.Chevron />
         </ListItem>
-      </View>
+      </TouchableOpacity>
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.fixToText}>
-        <TouchableOpacity onPress={profileButton}>
-          <Icon name="user" size={30} color={colors.black} />
-        </TouchableOpacity>
-        <Button
-          buttonStyle={{ backgroundColor: colors.primary }}
-          onPress={handleLogOut}
-          title="Log out"
-        />
-      </View>
+      <MyHeader />
 
       <Card
         containerStyle={{

@@ -25,6 +25,7 @@ import { firebaseConfig } from "./app/config/Fire";
 import Home from "./app/components/Home/Home.component";
 
 import DogOverviewScreen from "./app/screens/DogOverviewScreen";
+import DogScreen from "./app/screens/DogScreen";
 import LogInScreen from "./app/screens/LogInScreen";
 import MusherOverviewScreen from "./app/screens/MusherOverviewScreen";
 import MusherScreen from "./app/screens/MusherScreen";
@@ -59,19 +60,29 @@ function App() {
   return (
     <NavigationContainer>
       <Root.Navigator>
-        <Root.Screen name="Home" component={WelcomeScreen} />
-        <Root.Screen name="OrganizerScreen" component={OrganizerScreen} />
-
-        <Root.Screen name="LoginScreen" component={LogInScreen} />
         <Root.Screen
           name="MusherOverviewScreen"
           component={MusherOverviewScreen}
         />
+        <Root.Screen
+          name="WelcomeScreen"
+          component={WelcomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Root.Screen
+          name="OrganizerScreen"
+          component={OrganizerScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Root.Screen name="LoginScreen" component={LogInScreen} />
+
         <Root.Screen name="DogOverviewScreen" component={DogOverviewScreen} />
         <Root.Screen name="ProfileScreen" component={ProfileScreen} />
         <Root.Screen name="ParticipantScreen" component={ParticipantScreen} />
         {/* <Root.Screen name="handleLogOut" component={handleLogOut} /> */}
         <Root.Screen name="MusherScreen" component={MusherScreen} />
+        <Root.Screen name="Dog" component={DogScreen} />
       </Root.Navigator>
     </NavigationContainer>
   );
