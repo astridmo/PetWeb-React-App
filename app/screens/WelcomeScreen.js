@@ -1,8 +1,7 @@
 // This file is the Welcome screen of the app for PetWeb SB.
 // The page will ask the user to log in
 
-import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
@@ -13,41 +12,50 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Button, Input } from "react-native-elements";
 
 import App from "../../App.js";
 import colors from "../config/colors";
-import LogInScreen from "./LogInScreen";
-import ParticipantScreen from "./ParticipantScreen";
-
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from "react-native-vector-icons/AntDesign";
 
 function WelcomeScreen({ props, navigation, route }) {
+  const [password, setPassword] = useState("");
+  console.log(password);
   function goToLogIn() {
-    return (
-     navigation.push("LoginScreen")
-    );
+    return navigation.push("LoginScreen");
+  }
+  function handleLogIn() {
+    console.log("The text is", password);
+    if (password == "GodJul") {
+      return navigation.push("OrganizerScreen");
+    }
+    return alert("Wrong password!");
   }
 
   return (
     <SafeAreaView style={styles.container}>
-         <Image style={styles.background} source={{
+      {/* <Image style={styles.background} source={{
           uri:
             "https://nordnorge.com/content/uploads/2019/12/004317_GEIR-STIAN-A-LARSEN_www.finnmarkslopet.no_-1.jpg",
-        }} />
-        
-      <View style={styles.logoContainer}>
-        <Text style={styles.title}>PETWEB</Text>
-        <Image
-          style={styles.logo}
-          source={require("../assets/dog_logo.jpg")}
-        />
-        <Text>Enjoy the race</Text>
-      </View>
-   
+        }} /> */}
 
-      <TouchableOpacity style={styles.loginButton} onPress={goToLogIn}>
-        <Text> Login </Text>
-      </TouchableOpacity>
+      <View style={styles.logoContainer}>
+        <Text style={styles.title}>PetWeb</Text>
+        <Image style={styles.logo} source={require("../assets/dog_logo.jpg")} />
+      </View>
+
+      <View style={styles.content}>
+        <Input
+          placeholder="Password"
+          leftIcon={<Icon name="lock1" size={24} color="black" />}
+          onChangeText={(password) => {
+            setPassword(password);
+          }}
+          secureTextEntry={true}
+          label="Password"
+        />
+        <Button title="Login" onPress={handleLogIn} buttonStyle={{ backgroundColor: colors.primary }} />
+      </View>
     </SafeAreaView>
   );
 }
@@ -57,18 +65,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
+    backgroundColor: colors.white,
   },
-  background: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-end",
-  },
-  loginButton: {
-    width: "100%",
-    height: 60,
-    backgroundColor: colors.primary,
+  content: {
+    alignSelf: "center",
     justifyContent: "center",
-    alignItems: "center",
+    flex: 1,
+    width: "100%",
+  },
+  input: {
+    alignSelf: "center",
+    justifyContent: "center",
   },
   logo: {
     width: 100,

@@ -1,11 +1,6 @@
 import React from "react";
-import {
-    Text,
-    TouchableOpacity,
-  } from "react-native";
-  import {
-    Header
-  } from "react-native-elements";
+import { Text, TouchableOpacity } from "react-native";
+import { Header } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
 import Icon from "react-native-vector-icons/AntDesign";
@@ -34,10 +29,15 @@ function MyHeader() {
       }
       centerComponent={
         <TouchableOpacity>
-          {" "}
           <Text onPress={handleLogOut} style={{ color: colors.header }}>
             Log out
           </Text>
+        </TouchableOpacity>
+      }
+      leftComponent={
+        <TouchableOpacity>
+          <Icon name="arrowleft" />
+          size={30}
         </TouchableOpacity>
       }
       containerStyle={{

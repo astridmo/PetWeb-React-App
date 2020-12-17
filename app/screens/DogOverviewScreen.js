@@ -14,11 +14,9 @@ import { Button, Card, SearchBar } from "react-native-elements";
 import App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
-import MyHeader from "../components/MyHeader"
+import MyHeader from "../components/MyHeader";
 
 function DogOverviewScreen({ navigation }) {
-  const Separator = () => <View style={styles.separator} />;
-
   function handleLogOut() {
     return navigation.navigate("WelcomeScreen");
   }
@@ -32,16 +30,6 @@ function DogOverviewScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <MyHeader />
-      <View style={styles.fixToText}>
-        <TouchableOpacity onPress={profileButton}>
-          <Icon name="user" size={30} color={colors.black} />
-        </TouchableOpacity>
-        <Button
-          buttonStyle={{ backgroundColor: colors.primary }}
-          onPress={handleLogOut}
-          title="Log out"
-        />
-      </View>
 
       <Card
         containerStyle={{
@@ -50,17 +38,17 @@ function DogOverviewScreen({ navigation }) {
         }}
       >
         <View style={styles.cardTitle}>
-          <View style={{ flex: 1 }}>
-            <Text> </Text>
-            <Card.Title> Dog overview</Card.Title>
-          </View>
-          <Card.Divider />
           <TouchableOpacity
             style={{ backgroundColor: colors.primary, flex: 1 }}
           >
             <Text onPress={musherButton}> </Text>
             <Card.Title onPress={musherButton}> Musher overview </Card.Title>
           </TouchableOpacity>
+          <Card.Divider />
+          <View style={{ flex: 1 }}>
+            <Text> </Text>
+            <Card.Title> Dog overview</Card.Title>
+          </View>
         </View>
         <Card.Divider />
         <Text> Here a list of dogs will be provided</Text>

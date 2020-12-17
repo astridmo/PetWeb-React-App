@@ -51,43 +51,6 @@ function componentDidMount() {
   });
 }
 
-// function MyHeader() {
-//   const navigation = useNavigation();
-//   function handleLogOut() {
-//     return navigation.navigate("WelcomeScreen");
-//   }
-//   function profileButton() {
-//     return navigation.navigate("ProfileScreen");
-//   }
-//   return (
-//     <Header
-//       placement="right"
-//       rightComponent={
-//         <TouchableOpacity>
-//           <Icon
-//             name="user"
-//             size={30}
-//             color={colors.black}
-//             onPress={profileButton}
-//           />
-//         </TouchableOpacity>
-//       }
-//       centerComponent={
-//         <TouchableOpacity>
-//           {" "}
-//           <Text onPress={handleLogOut} style={{ color: colors.header }}>
-//             Log out
-//           </Text>
-//         </TouchableOpacity>
-//       }
-//       containerStyle={{
-//         backgroundColor: colors.background,
-//         justifyContent: "space-around",
-//       }}
-//     />
-//   );
-// }
-
 function Mushers() {
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
   const [mushers, setMushers] = useState([]); // Initial empty array of users
@@ -162,25 +125,6 @@ function Mushers() {
   );
 }
 
-const dataTemp = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-];
-const Item = ({ item, onPress, style }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-    <Text style={styles.title}>{item.title}</Text>
-  </TouchableOpacity>
-);
 
 function MusherOverviewScreen({ navigation }) {
   function dogButton() {
@@ -191,8 +135,6 @@ function MusherOverviewScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <MyHeader />
-      <HelloWorld />
-     
 
       <Card
         containerStyle={{

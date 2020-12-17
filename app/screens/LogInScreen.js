@@ -17,19 +17,16 @@ import Icon from "react-native-vector-icons/AntDesign";
 function LogInScreen({ props, navigation, route }) {
   const [password, setPassword] = useState("");
   console.log(password);
-  function handleLogIn(password) {
+  function handleLogIn() {
     console.log("The text is", password);
-    // if (password == "Finnmarkslopet2021") {
+    if (password == "GodJul") {
     return (
-      alert(
-        "Login not made yet. \nYou will be redireced to Organizer Screen as if logged in"
-      ),
       navigation.push("OrganizerScreen")
     );
-    // }
-    // return (
-    //   alert("Wrong password!", password)
-    // )
+    }
+    return (
+      alert("Wrong password!")
+    )
   }
 
   return (

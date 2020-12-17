@@ -7,9 +7,6 @@ import colors from "../config/colors";
 import MyHeader from "../components/MyHeader";
 
 function ProfileScreen({ navigation }) {
-  function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
-  }
 
   return (
     <SafeAreaView>
