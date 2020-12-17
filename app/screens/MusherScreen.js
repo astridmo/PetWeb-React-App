@@ -4,11 +4,10 @@ import {
   FlatList,
   SafeAreaView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Card, SearchBar, ListItem } from "react-native-elements";
+import { Button, Card, SearchBar, ListItem, Text } from "react-native-elements";
 
 import App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -96,7 +95,7 @@ function MusherScreen({ route, navigation }) {
         }}
         onPress={goToDog}
       >
-        <ListItem bottomDivider>
+        <ListItem bottomDivider style={styles.list}>
           <ListItem.Title>{item.dogname}</ListItem.Title>
           <ListItem.Subtitle>Chipnr: {item.key}</ListItem.Subtitle>
           <ListItem.Chevron />
@@ -111,27 +110,27 @@ function MusherScreen({ route, navigation }) {
 
       <Card
         containerStyle={{
-          alignItems: "center",
+          alignItems: "flex-start",
           alignSelf: "center",
         }}
       >
         <View style={styles.cardTitle}>
           <View style={{ flex: 1 }}>
-            <Text> </Text>
+            <Text h4> </Text>
             <Card.Title>
               {" "}
               {musherName} {musherSurname}{" "}
             </Card.Title>
+            <Card.Divider />
+            <Card.Title>Details</Card.Title>
+            <Text h4 h4Style={{fontSize:16, fontWeight:"normal"}}>Active in race: No</Text>
+            <Text></Text>
+            <Card.Title>Dogs</Card.Title>
           </View>
           <Card.Divider />
         </View>
-        <Card.Divider></Card.Divider>
-        <Text> Information about chosen musher</Text>
-        <Text>musherId: {JSON.stringify(musherId)}</Text>
-        <Text>musherName: {JSON.stringify(musherName)}</Text>
-        <Card.Divider />
 
-        <View>
+        <View styles={styles.list}>
           <Text>
             <FlatList data={dogs} renderItem={renderItem} />
           </Text>
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
-    backgroundColor: colors.background,
+    backgroundColor: colors.orangeBackground,
   },
   content: {
     alignItems: "center",
@@ -174,6 +173,9 @@ const styles = StyleSheet.create({
     flexDirection: "row-reverse",
     justifyContent: "space-around",
     alignItems: "flex-end",
+  },
+  list: {
+    alignSelf: "flex-start",
   },
   separator: {
     marginVertical: 8,

@@ -6,5 +6,6 @@ export default {
     white: "#FFFFFF",
     background: "#ECF8F9",
     header: "#2B597C",
-    header2: "#004579"
+    header2: "#004579",
+    orangeBackground: "#9A8967"
 }

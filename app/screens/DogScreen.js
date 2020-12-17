@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
-    backgroundColor: colors.background,
+    backgroundColor: colors.orangeBackground,
   },
   fixToText: {
     flexDirection: "row-reverse",
