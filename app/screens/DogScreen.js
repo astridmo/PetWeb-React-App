@@ -35,6 +35,9 @@ function DogScreen({ route, navigation }) {
             <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
             {"    "}Active in race:   No {"\n"}
             </Text>
+            <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
+            {"    "}Vet approval:   Yes {"\n"}
+            </Text>
             <Card.Divider />
         <Card.Title>Owner</Card.Title>
         <TouchableOpacity onPress={goBack}>

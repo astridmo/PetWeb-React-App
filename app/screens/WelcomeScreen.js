@@ -24,7 +24,7 @@ function WelcomeScreen({ props, navigation, route }) {
   function handleLogIn() {
     console.log("The text is", password);
     if (password == "GodJul") {
-      return navigation.push("OrganizerScreen");
+      return navigation.push("MusherOverviewScreen");
     }
     return alert(
       "Wrong password! Click 'Forgot Password?' to see secret password:)"
