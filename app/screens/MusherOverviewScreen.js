@@ -42,82 +42,90 @@ function componentDidMount() {
   });
 }
 
-function Mushers() {
-  const [loading, setLoading] = useState(true); // Set loading to true on component mount
-  const [mushers, setMushers] = useState([]); // Initial empty array of users
-  const navigation = useNavigation();
+function MusherOverviewScreen({ navigation }) {
+  function Mushers() {
+    const [loading, setLoading] = useState(true); // Set loading to true on component mount
+    const [mushers, setMushers] = useState([]); // Initial empty array of users
+    const navigation = useNavigation();
 
-  useEffect(() => {
-    const db = firebase
-      .firestore()
-      .collection("Mushers")
-      .orderBy("firstname")
-      .onSnapshot((querySnapshot) => {
-        const mushers = [];
+    useEffect(() => {
+      const db = firebase
+        .firestore()
+        .collection("Mushers")
+        .orderBy("firstname")
+        .startAt(searchDetails)
+        .endAt(searchDetails + "\uf8ff")
+        .onSnapshot((querySnapshot) => {
+          const mushers = [];
 
-        querySnapshot.forEach((documentSnapshot) => {
-          mushers.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
+          querySnapshot.forEach((documentSnapshot) => {
+            mushers.push({
+              ...documentSnapshot.data(),
+              key: documentSnapshot.id,
+            });
           });
+
+          setMushers(mushers);
+          setLoading(false);
+          console.log(mushers);
         });
 
-        setMushers(mushers);
-        setLoading(false);
-        console.log(mushers);
-      });
+      // Unsubscribe from events when no longer in use
+      return () => db();
+    }, []);
 
-    // Unsubscribe from events when no longer in use
-    return () => db();
-  }, []);
-
-  if (loading) {
-    return <ActivityIndicator />;
-  }
-
-  const renderItem = ({ item }) => {
-    function goToMusher() {
-      return navigation.navigate("MusherScreen", {
-        musherId: item.key,
-        musherName: item.firstname,
-        musherSurname: item.surname,
-      });
+    if (loading) {
+      return <ActivityIndicator />;
     }
 
-    return (
-      <TouchableOpacity
-        style={{
-          height: 50,
+    const renderItem = ({ item }) => {
+      function goToMusher() {
+        return navigation.navigate("MusherScreen", {
+          musherId: item.key,
+          musherName: item.firstname,
+          musherSurname: item.surname,
+        });
+      }
 
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        onPress={goToMusher}
-      >
-        <ListItem bottomDivider containerStyle={styles.list}>
-          <ListItem.Content>
-            <ListItem.Title>
-              {item.firstname} {item.surname}
-            </ListItem.Title>
-          </ListItem.Content>
-          <View styles={{ alignSelf: "flex-end" }}>
-            <ListItem.Chevron />
-          </View>
-        </ListItem>
-      </TouchableOpacity>
-    );
+      return (
+        <TouchableOpacity
+          style={{
+            height: 50,
+
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onPress={goToMusher}
+        >
+          <ListItem bottomDivider containerStyle={styles.list}>
+            <ListItem.Content>
+              <ListItem.Title>
+                {item.firstname} {item.surname}
+              </ListItem.Title>
+            </ListItem.Content>
+            <View styles={{ alignSelf: "flex-end" }}>
+              <ListItem.Chevron />
+            </View>
+          </ListItem>
+        </TouchableOpacity>
+      );
+    };
+
+    return <FlatList data={mushers} renderItem={renderItem} />;
+  }
+
+  const [searchDetails, setSearchDetails] = useState("");
+
+  const handleSearch = (searchDetails) => {
+    searchDetails = setSearchDetails(searchDetails);
   };
 
-  return <FlatList data={mushers} renderItem={renderItem} />;
-}
-
-function MusherOverviewScreen({ navigation }) {
-  const [search, setSearch] = useState([]);
   function dogButton() {
     return navigation.navigate("DogOverviewScreen");
   }
   console.log(foo());
 
+  console.log(searchDetails);
   return (
     <SafeAreaView style={styles.container}>
       <MyHeader />
@@ -143,10 +151,8 @@ function MusherOverviewScreen({ navigation }) {
         </View>
         <SearchBar
           placeholder="search"
-          onChangeText={(search) => {
-            setSearch(search);
-          }}
-          value={search}
+          onChangeText={handleSearch}
+          value={searchDetails}
           lightTheme
           round
           containerStyle={{ backgroundColor: colors.white }}
