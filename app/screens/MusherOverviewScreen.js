@@ -51,6 +51,7 @@ function Mushers() {
     const db = firebase
       .firestore()
       .collection("Mushers")
+      .orderBy("firstname")
       .onSnapshot((querySnapshot) => {
         const mushers = [];
 

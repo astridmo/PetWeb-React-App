@@ -71,7 +71,7 @@ function WelcomeScreen({ props, navigation, route }) {
       </Tooltip>
 
       <View styles={{ flex: 1, flexDirection: "column" }}>
-        <Image style={styles.elves} source={require("../assets/elves.jpg")} />
+        <Image style={styles.elves} source={require("../assets/alver.jpg")} />
       </View>
     </SafeAreaView>
   );

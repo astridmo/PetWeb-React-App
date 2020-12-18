@@ -39,9 +39,10 @@ function MyHeader() {
         </TouchableOpacity>
       }
       leftComponent={
-        <TouchableOpacity>
+          <TouchableOpacity>
           <Icon name="arrowleft" size={30} onPress={goBack} />
         </TouchableOpacity>
+        
       }
       containerStyle={{
         backgroundColor: colors.background,

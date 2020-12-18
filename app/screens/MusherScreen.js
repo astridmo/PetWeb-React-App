@@ -54,6 +54,7 @@ function MusherScreen({ route, navigation }) {
       .collection("Mushers")
       .doc(musherId)
       .collection("Dogs")
+      .orderBy("dogname")
       .onSnapshot((querySnapshot) => {
         const dogs = [];
         querySnapshot.forEach((documentSnapshot) => {
@@ -96,9 +97,13 @@ function MusherScreen({ route, navigation }) {
         onPress={goToDog}
       >
         <ListItem bottomDivider style={styles.list}>
+          {/* <ListItem.Content> */}
           <ListItem.Title>{item.dogname}</ListItem.Title>
           <ListItem.Subtitle>Chipnr: {item.key}</ListItem.Subtitle>
-          <ListItem.Chevron />
+          <View styles={{ alignSelf: "flex-end" }}>
+            <ListItem.Chevron />
+          </View>
+          {/* </ListItem.Content> */}
         </ListItem>
       </TouchableOpacity>
     );
@@ -107,7 +112,6 @@ function MusherScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <MyHeader />
-
       <Card
         containerStyle={{
           alignItems: "flex-start",
@@ -123,31 +127,24 @@ function MusherScreen({ route, navigation }) {
             </Card.Title>
             <Card.Divider />
             <Card.Title>Details</Card.Title>
-            <Text h4 h4Style={{fontSize:16, fontWeight:"normal"}}>Active in race: No</Text>
-            <Text></Text>
+
+            <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
+              {"    "}Christmas spirit: Yes {"\n"}
+            </Text>
+            <Card.Divider />
             <Card.Title>Dogs</Card.Title>
           </View>
-          <Card.Divider />
         </View>
-
-        <View styles={styles.list}>
-          <Text>
-            <FlatList data={dogs} renderItem={renderItem} />
-          </Text>
-        </View>
+        <FlatList data={dogs} renderItem={renderItem} />
+        {/* <View styles={styles.list}>
+          <Text></Text>
+        </View> */}
       </Card>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  //   card: {
-  //     backgroundColor: colors.primary,
-  //     flex: 0.8,
-  //     width: "80%",
-  //     alignItems: "center",
-  //     alignSelf: "center",
-  //   },
   cardTitle: {
     flexDirection: "row",
     width: "100%",
@@ -158,6 +155,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
     backgroundColor: colors.orangeBackground,
+    paddingBottom: 100,
   },
   content: {
     alignItems: "center",
@@ -176,11 +174,7 @@ const styles = StyleSheet.create({
   },
   list: {
     alignSelf: "flex-start",
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: "#737373",
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    flex: 1,
   },
   squares: {
     width: "80%",
