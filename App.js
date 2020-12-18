@@ -60,6 +60,11 @@ function App() {
   return (
     <NavigationContainer>
       <Root.Navigator>
+      <Root.Screen
+          name="MusherOverviewScreen"
+          component={MusherOverviewScreen}
+          options={{ headerShown: false }}
+        />
         <Root.Screen
           name="WelcomeScreen"
           component={WelcomeScreen}
@@ -70,11 +75,7 @@ function App() {
           component={OrganizerScreen}
           options={{ headerShown: false }}
         />
-        <Root.Screen
-          name="MusherOverviewScreen"
-          component={MusherOverviewScreen}
-          options={{ headerShown: false }}
-        />
+       
         <Root.Screen
           name="LoginScreen"
           component={LogInScreen}

@@ -1,22 +1,16 @@
 import React, { Component, useEffect, useState } from "react";
 import {
   ActivityIndicator,
-  Image,
-  ImageBackground,
   FlatList,
   Platform,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import {
-  Button,
-  Card,
-  ListItem,
-  SearchBar,
-} from "react-native-elements";
+import { Button, Card, ListItem, SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
 import * as App from "../../App.js";
@@ -30,7 +24,7 @@ import {
 } from "../config/utilities";
 //import MusherList from "../components/MusherList";
 //import tempData from "../config/tempData";
-import MyHeader from "../components/MyHeader"
+import MyHeader from "../components/MyHeader";
 
 // Initialize firebase
 import * as firebase from "firebase";
@@ -93,13 +87,13 @@ function Mushers() {
       <TouchableOpacity
         style={{
           height: 50,
-          flex: 1,
+
           alignItems: "center",
           justifyContent: "center",
         }}
         onPress={goToMusher}
       >
-        <ListItem bottomDivider style={styles.list}>
+        <ListItem bottomDivider containerStyle={styles.list}>
           <ListItem.Content>
             <ListItem.Title>
               {item.firstname} {item.surname}
@@ -113,15 +107,8 @@ function Mushers() {
     );
   };
 
-  return (
-    <View styles={{ width: "100%" }}>
-      <Text styles={{ width: "100%" }}>
-        <FlatList data={mushers} renderItem={renderItem} />
-      </Text>
-    </View>
-  );
+  return <FlatList data={mushers} renderItem={renderItem} />;
 }
-
 
 function MusherOverviewScreen({ navigation }) {
   function dogButton() {
@@ -171,6 +158,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
     backgroundColor: colors.background,
+    paddingBottom: 100,
   },
   content: {
     alignItems: "center",
