@@ -18,9 +18,6 @@ import Icon from "react-native-vector-icons/AntDesign";
 function WelcomeScreen({ props, navigation, route }) {
   const [password, setPassword] = useState("");
   console.log(password);
-  function goToLogIn() {
-    return navigation.push("LoginScreen");
-  }
   function handleLogIn() {
     console.log("The text is", password);
     if (password == "GodJul") {

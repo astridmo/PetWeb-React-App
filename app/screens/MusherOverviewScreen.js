@@ -112,6 +112,7 @@ function Mushers() {
 }
 
 function MusherOverviewScreen({ navigation }) {
+  const [search, setSearch] = useState([]);
   function dogButton() {
     return navigation.navigate("DogOverviewScreen");
   }
@@ -140,8 +141,16 @@ function MusherOverviewScreen({ navigation }) {
             <Card.Title onPress={dogButton}> Dog overview </Card.Title>
           </TouchableOpacity>
         </View>
-
-        <Card.Divider />
+        <SearchBar
+          placeholder="search"
+          onChangeText={(search) => {
+            setSearch(search);
+          }}
+          value={search}
+          lightTheme
+          round
+          containerStyle={{ backgroundColor: colors.white }}
+        />
         <Mushers />
       </Card>
     </SafeAreaView>
