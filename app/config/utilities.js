@@ -4,7 +4,6 @@ import { Button } from "react-native-elements";
 
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
-import * as App from "../../App.js";
 import ProfileScreen from "../screens/ProfileScreen";
 import { useNavigation } from "@react-navigation/native";
 

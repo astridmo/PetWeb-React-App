@@ -13,7 +13,6 @@ import {
 import { Button, Card, ListItem, SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
-import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
 import {
@@ -24,7 +23,7 @@ import {
 } from "../config/utilities";
 //import MusherList from "../components/MusherList";
 //import tempData from "../config/tempData";
-import MyHeader from "../components/MyHeader";
+import MyHeader from "../components/HeaderNoBack";
 
 // Initialize firebase
 import * as firebase from "firebase";
@@ -42,80 +41,90 @@ function componentDidMount() {
   });
 }
 
-function Mushers() {
-  const [loading, setLoading] = useState(true); // Set loading to true on component mount
-  const [mushers, setMushers] = useState([]); // Initial empty array of users
-  const navigation = useNavigation();
+function MusherOverviewScreen({ navigation }) {
+  function Mushers() {
+    const [loading, setLoading] = useState(true); // Set loading to true on component mount
+    const [mushers, setMushers] = useState([]); // Initial empty array of users
+    const navigation = useNavigation();
 
-  useEffect(() => {
-    const db = firebase
-      .firestore()
-      .collection("Mushers")
-      .onSnapshot((querySnapshot) => {
-        const mushers = [];
+    useEffect(() => {
+      const db = firebase
+        .firestore()
+        .collection("Mushers")
+        .orderBy("firstname")
+        .startAt(searchDetails)
+        .endAt(searchDetails + "\uf8ff")
+        .onSnapshot((querySnapshot) => {
+          const mushers = [];
 
-        querySnapshot.forEach((documentSnapshot) => {
-          mushers.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
+          querySnapshot.forEach((documentSnapshot) => {
+            mushers.push({
+              ...documentSnapshot.data(),
+              key: documentSnapshot.id,
+            });
           });
+
+          setMushers(mushers);
+          setLoading(false);
+          console.log(mushers);
         });
 
-        setMushers(mushers);
-        setLoading(false);
-        console.log(mushers);
-      });
+      // Unsubscribe from events when no longer in use
+      return () => db();
+    }, []);
 
-    // Unsubscribe from events when no longer in use
-    return () => db();
-  }, []);
-
-  if (loading) {
-    return <ActivityIndicator />;
-  }
-
-  const renderItem = ({ item }) => {
-    function goToMusher() {
-      return navigation.navigate("MusherScreen", {
-        musherId: item.key,
-        musherName: item.firstname,
-        musherSurname: item.surname,
-      });
+    if (loading) {
+      return <ActivityIndicator />;
     }
 
-    return (
-      <TouchableOpacity
-        style={{
-          height: 50,
+    const renderItem = ({ item }) => {
+      function goToMusher() {
+        return navigation.navigate("MusherScreen", {
+          musherId: item.key,
+          musherName: item.firstname,
+          musherSurname: item.surname,
+        });
+      }
 
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        onPress={goToMusher}
-      >
-        <ListItem bottomDivider containerStyle={styles.list}>
-          <ListItem.Content>
-            <ListItem.Title>
-              {item.firstname} {item.surname}
-            </ListItem.Title>
-          </ListItem.Content>
-          <View styles={{ alignSelf: "flex-end" }}>
-            <ListItem.Chevron />
-          </View>
-        </ListItem>
-      </TouchableOpacity>
-    );
+      return (
+        <TouchableOpacity
+          style={{
+            height: 50,
+
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onPress={goToMusher}
+        >
+          <ListItem bottomDivider containerStyle={styles.list}>
+            <ListItem.Content>
+              <ListItem.Title>
+                {item.firstname} {item.surname}
+              </ListItem.Title>
+            </ListItem.Content>
+            <View styles={{ alignSelf: "flex-end" }}>
+              <ListItem.Chevron />
+            </View>
+          </ListItem>
+        </TouchableOpacity>
+      );
+    };
+
+    return <FlatList data={mushers} renderItem={renderItem} />;
+  }
+
+  const [searchDetails, setSearchDetails] = useState("");
+
+  const handleSearch = (searchDetails) => {
+    searchDetails = setSearchDetails(searchDetails);
   };
 
-  return <FlatList data={mushers} renderItem={renderItem} />;
-}
-
-function MusherOverviewScreen({ navigation }) {
   function dogButton() {
     return navigation.navigate("DogOverviewScreen");
   }
   console.log(foo());
 
+  console.log(searchDetails);
   return (
     <SafeAreaView style={styles.container}>
       <MyHeader />
@@ -139,8 +148,14 @@ function MusherOverviewScreen({ navigation }) {
             <Card.Title onPress={dogButton}> Dog overview </Card.Title>
           </TouchableOpacity>
         </View>
-
-        <Card.Divider />
+        <SearchBar
+          placeholder="search"
+          onChangeText={handleSearch}
+          value={searchDetails}
+          lightTheme
+          round
+          containerStyle={{ backgroundColor: colors.white }}
+        />
         <Mushers />
       </Card>
     </SafeAreaView>

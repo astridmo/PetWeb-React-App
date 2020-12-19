@@ -11,7 +11,6 @@ import {
   View,
 } from "react-native";
 
-import app from "../../App.js";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/AntDesign";
 

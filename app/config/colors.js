@@ -7,5 +7,6 @@ export default {
     background: "#ECF8F9",
     header: "#2B597C",
     header2: "#004579",
-    orangeBackground: "#9A8967"
+    orangeBackground: "#9A8967",
+    grey: "#BABABA"
 }
