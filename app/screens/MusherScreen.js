@@ -129,7 +129,7 @@ function MusherScreen({ route, navigation }) {
             <Card.Title>Details</Card.Title>
 
             <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
-              {"    "}Christmas spirit: Yes {"\n"}
+              {"    "}Active in race: Yes {"\n"}
             </Text>
             <Card.Divider />
             <Card.Title>Dogs</Card.Title>

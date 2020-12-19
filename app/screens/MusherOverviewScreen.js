@@ -24,7 +24,7 @@ import {
 } from "../config/utilities";
 //import MusherList from "../components/MusherList";
 //import tempData from "../config/tempData";
-import MyHeader from "../components/MyHeader";
+import MyHeader from "../components/HeaderNoBack";
 
 // Initialize firebase
 import * as firebase from "firebase";
