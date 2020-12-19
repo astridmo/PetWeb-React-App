@@ -13,7 +13,6 @@ import {
 import { Button, Card, ListItem, SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
-import * as App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
 import {

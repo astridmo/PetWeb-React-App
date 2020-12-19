@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { Button, Card, SearchBar, ListItem, Text } from "react-native-elements";
 
-import App from "../../App.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
 import MyHeader from "../components/MyHeader";

@@ -1,5 +1,4 @@
 import React, { Component, useEffect, useState } from "react";
-import * as App from "../../App.js";
 import { useNavigation } from "@react-navigation/native";
 
 import * as firebase from "firebase";
