@@ -11,6 +11,3 @@ web-build/
 
 # macOS
 .DS_Store
-
-# firebase sdk ignore
-**/Fire.js
