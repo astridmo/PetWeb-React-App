@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ImageBackground,
 } from "react-native";
 import { Button, Input, Tooltip } from "react-native-elements";
 
@@ -30,46 +31,57 @@ function WelcomeScreen({ props, navigation, route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Image style={styles.background} source={{
+      <ImageBackground
+        style={{ flex: 1 }}
+        source={require("../assets/elves_background.png")}
+      >
+        {/* <Image style={styles.background} source={{
           uri:
             "https://nordnorge.com/content/uploads/2019/12/004317_GEIR-STIAN-A-LARSEN_www.finnmarkslopet.no_-1.jpg",
         }} /> */}
-      <Text></Text>
-      <Text></Text>
+        <Text></Text>
+        <Text></Text>
 
-      <View style={styles.content}>
-        <Text style={styles.title}>PetWeb</Text>
-        <Image style={styles.logo} source={require("../assets/dog_logo.jpg")} />
-      </View>
-      {/* <View style={styles.logoContainer}>
+        <View style={styles.content}>
+          <Text style={styles.title}>PetWeb</Text>
+          <Image
+            style={styles.logo}
+            source={require("../assets/dog_logo.jpg")}
+          />
+
+          <Input
+            placeholder="Password"
+            leftIcon={<Icon name="lock1" size={24} color="black" />}
+            onChangeText={(password) => {
+              setPassword(password);
+            }}
+            secureTextEntry={true}
+            label="Password"
+          />
+          <Button
+            title="Login"
+            onPress={handleLogIn}
+            buttonStyle={{ backgroundColor: colors.primary }}
+          />
+          <Tooltip popover={<Text>Password is: GodJul</Text>}>
+            <Text style={styles.forgot}>Forgot password ?</Text>
+          </Tooltip>
+        </View>
+        {/* <View style={styles.logoContainer}>
           {/* <Text style={styles.title}>PetWeb</Text> */}
-      {/* <Image
+        {/* <Image
             style={styles.logo}
             source={require("../assets/dog_logo.jpg")}
           />
         </View>  */}
+        <View
+          styles={{ flex: 1, alignSelf: "center", justifyContent: "center" }}
+        ></View>
 
-      <Input
-        placeholder="Password"
-        leftIcon={<Icon name="lock1" size={24} color="black" />}
-        onChangeText={(password) => {
-          setPassword(password);
-        }}
-        secureTextEntry={true}
-        label="Password"
-      />
-      <Button
-        title="Login"
-        onPress={handleLogIn}
-        buttonStyle={{ backgroundColor: colors.primary }}
-      />
-      <Tooltip popover={<Text>Password is: GodJul</Text>}>
-        <Text style={styles.forgot}>Forgot password ?</Text>
-      </Tooltip>
-
-      <View styles={{ flex: 1, flexDirection: "column" }}>
+        {/* <View styles={{ flex: 1, flexDirection: "column" }}>
         <Image style={styles.elves} source={require("../assets/alver.jpg")} />
-      </View>
+      </View> */}
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -89,6 +101,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "center",
     justifyContent: "center",
+    width: "100%",
+    marginBottom: 100,
   },
   elves: {
     width: "100%",
