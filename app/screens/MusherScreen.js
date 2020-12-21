@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { Card, SearchBar, ListItem, Text } from "react-native-elements";
 
-import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
 import MyHeader from "../components/MyHeader";
 
@@ -116,6 +115,8 @@ function MusherScreen({ route, navigation }) {
         <View style={styles.cardTitle}>
           <View style={{ flex: 1 }}>
             <Text h4> </Text>
+
+            {/* Printing the title: */}
             <Card.Title>
               {" "}
               {musherName} {musherSurname}{" "}
@@ -128,6 +129,8 @@ function MusherScreen({ route, navigation }) {
               {"    "}Active in race: Yes {"\n"}
             </Text>
             <Card.Divider />
+
+            {/* Printing the owner's dogs: */}
             <Card.Title>Dogs</Card.Title>
           </View>
         </View>
@@ -138,6 +141,7 @@ function MusherScreen({ route, navigation }) {
   );
 }
 
+// Styles for the screen
 const styles = StyleSheet.create({
   cardTitle: {
     flexDirection: "row",
@@ -182,4 +186,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// Exporting the screen
 export default MusherScreen;
