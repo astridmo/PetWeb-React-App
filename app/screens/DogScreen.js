@@ -31,32 +31,24 @@ function DogScreen({ route, navigation }) {
         </Card.Title>
         <Card.Divider />
         <Card.Title>Details</Card.Title>
-            <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
-            {"    "}Active in race:   No {"\n"}
-            </Text>
-            <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
-            {"    "}Vet approval:   Yes {"\n"}
-            </Text>
-            <Card.Divider />
+        <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
+          {"    "}Active in race: No {"\n"}
+        </Text>
+        <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
+          {"    "}Vet approval: Yes {"\n"}
+        </Text>
+        <Card.Divider />
         <Card.Title>Owner</Card.Title>
         <TouchableOpacity onPress={goBack}>
-          <Text h4 h4Style={styles.text}>
-          {"    "}{musherName} {musherSurname} {"    "}
-            <Icon
-              name="right"
-              size={10}
-              style={{ color: colors.grey }}
-            />
-            {"\n"}
-          </Text>
+          <ListItem bottomDivider>
+            <ListItem.Content>
+              <ListItem.Title>
+                {musherName} {musherSurname}
+              </ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron />
+          </ListItem>
         </TouchableOpacity>
-        <Card.Divider />
-
-        {/* <View>
-              <Text>
-                <FlatList data={dogs} renderItem={renderItem} />
-              </Text> */}
-        {/* </View> */}
       </Card>
     </SafeAreaView>
   );
