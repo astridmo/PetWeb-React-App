@@ -1,10 +1,11 @@
+// This is the screen to see the overview of the mushers
+
 import React, { Component, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
   Platform,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -42,12 +43,17 @@ function componentDidMount() {
 }
 
 function MusherOverviewScreen({ navigation }) {
+  // function for the entire screen
+
   function Mushers() {
+    // function for getting the data from firebase. This should be an own component in a seperate file,
+    // but to make search work this is in here for now
     const [loading, setLoading] = useState(true); // Set loading to true on component mount
     const [mushers, setMushers] = useState([]); // Initial empty array of users
-    const navigation = useNavigation();
+    const navigation = useNavigation(); // Importing navigation when the function is not a screen
 
     useEffect(() => {
+      // Getting data from firebase
       const db = firebase
         .firestore()
         .collection("Mushers")
@@ -74,11 +80,14 @@ function MusherOverviewScreen({ navigation }) {
     }, []);
 
     if (loading) {
+      // If the data from firebase is loading
       return <ActivityIndicator />;
     }
 
     const renderItem = ({ item }) => {
+      // function for rendering the list
       function goToMusher() {
+        // function to navigate to chosen musher
         return navigation.navigate("MusherScreen", {
           musherId: item.key,
           musherName: item.firstname,
@@ -88,12 +97,12 @@ function MusherOverviewScreen({ navigation }) {
 
       return (
         <TouchableOpacity
-          style={{
-            height: 50,
+          // style={{
+          //   height: 50,
 
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          //   alignItems: "center",
+          //   justifyContent: "center",
+          // }}
           onPress={goToMusher}
         >
           <ListItem bottomDivider containerStyle={styles.list}>
@@ -102,9 +111,9 @@ function MusherOverviewScreen({ navigation }) {
                 {item.firstname} {item.surname}
               </ListItem.Title>
             </ListItem.Content>
-            <View styles={{ alignSelf: "flex-end" }}>
+            {/* <View styles={{ alignSelf: "flex-end" }}> */}
               <ListItem.Chevron />
-            </View>
+            {/* </View> */}
           </ListItem>
         </TouchableOpacity>
       );

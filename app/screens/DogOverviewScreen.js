@@ -1,3 +1,4 @@
+// Screen to see the overview of all mushers
 import React from "react";
 import {
   Image,
@@ -16,20 +17,18 @@ import colors from "../config/colors";
 import MyHeader from "../components/HeaderNoBack";
 
 function DogOverviewScreen({ navigation }) {
-  function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
-  }
+  // function for the screen
   function musherButton() {
+    // function for when clicking on chosen musher
     return navigation.navigate("MusherOverviewScreen");
-  }
-  function profileButton() {
-    return navigation.navigate("ProfileScreen");
   }
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Importing header */}
       <MyHeader />
 
+      {/* Importing the card with its content */}
       <Card
         containerStyle={{
           alignItems: "center",

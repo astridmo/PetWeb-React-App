@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Card, SearchBar, ListItem, Text } from "react-native-elements";
+import {Card, SearchBar, ListItem, Text } from "react-native-elements";
 
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
@@ -22,18 +22,13 @@ if (firebase.apps.length == 0) {
 const db = firebase.firestore();
 
 function MusherScreen({ route, navigation }) {
-  const { musherId, musherName, musherSurname } = route.params;
-  function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
-  }
-  function profileButton() {
-    return navigation.navigate("ProfileScreen");
-  }
+  // function for the entire screen
+  const { musherId, musherName, musherSurname } = route.params; // Getting data from the navigation from MusherOverviewScreen
   console.log("Hei", musherId);
   console.log("Hallo");
   console.log(musherId);
 
-  // Getting data from firestore
+  // Getting data from firestore and printing to log - for debugging
   db.collection("Mushers")
     .doc(musherId)
     .collection("Dogs")
@@ -48,6 +43,7 @@ function MusherScreen({ route, navigation }) {
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
   const [dogs, setDogs] = useState([]); // Initial empty array of dogs
   useEffect(() => {
+    // Getting data about dogs from database and putting it in the dogs-list
     const db = firebase
       .firestore()
       .collection("Mushers")
@@ -74,7 +70,9 @@ function MusherScreen({ route, navigation }) {
   console.log("Alle hunder3:", dogs);
 
   const renderItem = ({ item }) => {
+    // function to render the list, to show updated list on screen
     function goToDog() {
+      // function to navigate to chosen dog
       return navigation.navigate("Dog", {
         chipnr: item.key,
         musherName: musherName,
@@ -87,22 +85,20 @@ function MusherScreen({ route, navigation }) {
     }
     return (
       <TouchableOpacity
-        style={{
-          height: 50,
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+        // style={{
+        //   height: 50,
+        //   flex: 1,
+        //   alignItems: "center",
+        //   justifyContent: "center",
+        // }}
         onPress={goToDog}
       >
-        <ListItem bottomDivider style={styles.list}>
-          {/* <ListItem.Content> */}
+        <ListItem bottomDivider containerStyle={styles.list} numberOfLines={1}>
+          <ListItem.Content>
           <ListItem.Title>{item.dogname}</ListItem.Title>
-          <ListItem.Subtitle>Chipnr: {item.key}</ListItem.Subtitle>
-          <View styles={{ alignSelf: "flex-end" }}>
-            <ListItem.Chevron />
-          </View>
-          {/* </ListItem.Content> */}
+          <ListItem.Subtitle style={{color:colors.darkGrey}}>Chipnr: {item.key}</ListItem.Subtitle>
+          </ListItem.Content>
+          <ListItem.Chevron />
         </ListItem>
       </TouchableOpacity>
     );
@@ -173,7 +169,7 @@ const styles = StyleSheet.create({
   },
   list: {
     alignSelf: "flex-start",
-    flex: 1,
+    // flex: 1,
   },
   squares: {
     width: "80%",
