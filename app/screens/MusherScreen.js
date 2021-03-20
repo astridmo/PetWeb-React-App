@@ -28,16 +28,16 @@ function MusherScreen({ route, navigation }) {
   console.log(musherId);
 
   // Getting data from firestore and printing to log - for debugging
-  db.collection("Mushers")
-    .doc(musherId)
-    .collection("Dogs")
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-      });
-    });
+  // db.collection("Mushers")
+  //   .doc(musherId)
+  //   .collection("Dogs")
+  //   .get()
+  //   .then(function (querySnapshot) {
+  //     querySnapshot.forEach(function (doc) {
+  //       // doc.data() is never undefined for query doc snapshots
+  //       console.log(doc.id, " => ", doc.data());
+  //     });
+  //   });
 
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
   const [dogs, setDogs] = useState([]); // Initial empty array of dogs
@@ -86,7 +86,7 @@ function MusherScreen({ route, navigation }) {
     return (
       // Returning a touchable list
       <TouchableOpacity onPress={goToDog}>
-        <ListItem bottomDivider containerStyle={styles.list} numberOfLines={1}>
+        <ListItem bottomDivider containerStyle={styles.list}>
           <ListItem.Content>
             {/* Printing the data of the owners dogs: */}
             <ListItem.Title>{item.dogname}</ListItem.Title>
