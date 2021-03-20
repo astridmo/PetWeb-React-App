@@ -17,7 +17,7 @@ function ProfileScreen({ navigation }) {
         <Card.Title>Profile</Card.Title>
         <Text> Not made yet, sorry </Text>
         <View>
-        <Image style={styles.grinch} source={require("../assets/grinch.png")} />
+        <Image style={styles.grinch} source={require("../assets/profile_pic.png")} />
         </View>
         
       </Card>
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   grinch: {
     width: "100%",
+    height: 500,
     resizeMode: "contain",
   },
   text: {
