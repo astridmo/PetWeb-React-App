@@ -7,9 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Card, SearchBar, ListItem, Text } from "react-native-elements";
+import { Card, SearchBar, ListItem, Text } from "react-native-elements";
 
-import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
 import MyHeader from "../components/MyHeader";
 
@@ -22,32 +21,28 @@ if (firebase.apps.length == 0) {
 const db = firebase.firestore();
 
 function MusherScreen({ route, navigation }) {
-  const { musherId, musherName, musherSurname } = route.params;
-  function handleLogOut() {
-    return navigation.navigate("WelcomeScreen");
-  }
-  function profileButton() {
-    return navigation.navigate("ProfileScreen");
-  }
+  // function for the entire screen
+  const { musherId, musherName, musherSurname } = route.params; // Getting data from the navigation from MusherOverviewScreen
   console.log("Hei", musherId);
   console.log("Hallo");
   console.log(musherId);
 
-  // Getting data from firestore
-  db.collection("Mushers")
-    .doc(musherId)
-    .collection("Dogs")
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-      });
-    });
+  // Getting data from firestore and printing to log - for debugging
+  // db.collection("Mushers")
+  //   .doc(musherId)
+  //   .collection("Dogs")
+  //   .get()
+  //   .then(function (querySnapshot) {
+  //     querySnapshot.forEach(function (doc) {
+  //       // doc.data() is never undefined for query doc snapshots
+  //       console.log(doc.id, " => ", doc.data());
+  //     });
+  //   });
 
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
   const [dogs, setDogs] = useState([]); // Initial empty array of dogs
   useEffect(() => {
+    // Getting data about dogs from database and putting it in the dogs-list
     const db = firebase
       .firestore()
       .collection("Mushers")
@@ -74,7 +69,9 @@ function MusherScreen({ route, navigation }) {
   console.log("Alle hunder3:", dogs);
 
   const renderItem = ({ item }) => {
+    // function to render the list, to show updated list on screen
     function goToDog() {
+      // function to navigate to chosen dog. We are sending some data to the next screen
       return navigation.navigate("Dog", {
         chipnr: item.key,
         musherName: musherName,
@@ -83,26 +80,21 @@ function MusherScreen({ route, navigation }) {
       });
     }
     if (loading) {
+      // if the mushers/database are loading
       return <ActivityIndicator />;
     }
     return (
-      <TouchableOpacity
-        style={{
-          height: 50,
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        onPress={goToDog}
-      >
-        <ListItem bottomDivider style={styles.list}>
-          {/* <ListItem.Content> */}
-          <ListItem.Title>{item.dogname}</ListItem.Title>
-          <ListItem.Subtitle>Chipnr: {item.key}</ListItem.Subtitle>
-          <View styles={{ alignSelf: "flex-end" }}>
-            <ListItem.Chevron />
-          </View>
-          {/* </ListItem.Content> */}
+      // Returning a touchable list
+      <TouchableOpacity onPress={goToDog}>
+        <ListItem bottomDivider containerStyle={styles.list}>
+          <ListItem.Content>
+            {/* Printing the data of the owners dogs: */}
+            <ListItem.Title>{item.dogname}</ListItem.Title>
+            <ListItem.Subtitle style={{ color: colors.darkGrey }}>
+              Chipnr: {item.key}
+            </ListItem.Subtitle>
+          </ListItem.Content>
+          <ListItem.Chevron />
         </ListItem>
       </TouchableOpacity>
     );
@@ -110,7 +102,10 @@ function MusherScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Printing the header */}
       <MyHeader />
+
+      {/* Printing the card */}
       <Card
         containerStyle={{
           alignItems: "flex-start",
@@ -120,29 +115,33 @@ function MusherScreen({ route, navigation }) {
         <View style={styles.cardTitle}>
           <View style={{ flex: 1 }}>
             <Text h4> </Text>
+
+            {/* Printing the title: */}
             <Card.Title>
               {" "}
               {musherName} {musherSurname}{" "}
             </Card.Title>
             <Card.Divider />
-            <Card.Title>Details</Card.Title>
 
+            {/* Printing the data of the owner: */}
+            <Card.Title>Details</Card.Title>
             <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
               {"    "}Active in race: Yes {"\n"}
             </Text>
             <Card.Divider />
+
+            {/* Printing the owner's dogs: */}
             <Card.Title>Dogs</Card.Title>
           </View>
         </View>
+        {/* Printing the list of dogs */}
         <FlatList data={dogs} renderItem={renderItem} />
-        {/* <View styles={styles.list}>
-          <Text></Text>
-        </View> */}
       </Card>
     </SafeAreaView>
   );
 }
 
+// Styles for the screen
 const styles = StyleSheet.create({
   cardTitle: {
     flexDirection: "row",
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
   },
   list: {
     alignSelf: "flex-start",
-    flex: 1,
+    // flex: 1,
   },
   squares: {
     width: "80%",
@@ -187,4 +186,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// Exporting the screen
 export default MusherScreen;

@@ -7,21 +7,24 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Text, Button, Card, SearchBar, ListItem } from "react-native-elements";
+import { Text, Card, SearchBar, ListItem } from "react-native-elements";
 
-import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../config/colors";
 import MyHeader from "../components/MyHeader";
 
 function DogScreen({ route, navigation }) {
-  const { musherId, chipnr, musherName, musherSurname, dogname } = route.params;
+  // function for the entire screen
+  const { musherId, chipnr, musherName, musherSurname, dogname } = route.params; //Achieving data from MusherScreen
   function goBack() {
+    // function to navigate back to the previous screen
     return navigation.goBack();
   }
   return (
     <SafeAreaView style={styles.container}>
+      {/* Printing the header */}
       <MyHeader />
 
+      {/* Printing the card */}
       <Card>
         <Text> </Text>
         <Card.Title>
@@ -30,33 +33,30 @@ function DogScreen({ route, navigation }) {
           Chip: {chipnr}{" "}
         </Card.Title>
         <Card.Divider />
+
+        {/* Printing the details for the dog: */}
         <Card.Title>Details</Card.Title>
-            <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
-            {"    "}Active in race:   No {"\n"}
-            </Text>
-            <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
-            {"    "}Vet approval:   Yes {"\n"}
-            </Text>
-            <Card.Divider />
-        <Card.Title>Owner</Card.Title>
-        <TouchableOpacity onPress={goBack}>
-          <Text h4 h4Style={styles.text}>
-          {"    "}{musherName} {musherSurname} {"    "}
-            <Icon
-              name="right"
-              size={10}
-              style={{ color: colors.grey }}
-            />
-            {"\n"}
-          </Text>
-        </TouchableOpacity>
+        <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
+          {"    "}Active in race: No {"\n"}
+        </Text>
+        <Text h4 h4Style={{ fontSize: 16, fontWeight: "normal" }}>
+          {"    "}Vet approval: Yes {"\n"}
+        </Text>
         <Card.Divider />
 
-        {/* <View>
-              <Text>
-                <FlatList data={dogs} renderItem={renderItem} />
-              </Text> */}
-        {/* </View> */}
+        {/* Printing the data of the owner: */}
+        <Card.Title>Owner</Card.Title>
+        <TouchableOpacity onPress={goBack}>
+          {/* Making a list */}
+          <ListItem bottomDivider>
+            <ListItem.Content>
+              <ListItem.Title>
+                {musherName} {musherSurname}
+              </ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron />
+          </ListItem>
+        </TouchableOpacity>
       </Card>
     </SafeAreaView>
   );

@@ -15,10 +15,11 @@ function ProfileScreen({ navigation }) {
       <MyHeader />
       <Card style={{flex:1}}>
         <Card.Title>Profile</Card.Title>
-        <View>
-        <Image style={styles.grinch} source={require("../assets/grinch.png")} />
-        </View>
         <Text> Not made yet, sorry </Text>
+        <View>
+        <Image style={styles.grinch} source={require("../assets/profile_pic.png")} />
+        </View>
+        
       </Card>
     </SafeAreaView>
   );
@@ -29,9 +30,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHight : 0, //platform specific. Setting padding to 20 if android, otherwise equal 0
+    paddingBottom: 100,
   },
   grinch: {
     width: "100%",
+    height: 500,
     resizeMode: "contain",
   },
   text: {

@@ -21,7 +21,7 @@ function WelcomeScreen({ props, navigation, route }) {
   console.log(password);
   function handleLogIn() {
     console.log("The text is", password);
-    if (password == "GodJul") {
+    if (password == "PetWeb") {
       return navigation.push("MusherOverviewScreen");
     }
     return alert(
@@ -33,7 +33,7 @@ function WelcomeScreen({ props, navigation, route }) {
     <SafeAreaView style={styles.container}>
       <ImageBackground
         style={{ flex: 1 }}
-        source={require("../assets/elves_background.png")}
+        source={require("../assets/dog_background.png")}
       >
         {/* <Image style={styles.background} source={{
           uri:
@@ -44,10 +44,16 @@ function WelcomeScreen({ props, navigation, route }) {
 
         <View style={styles.content}>
           <Text style={styles.title}>PetWeb</Text>
+          {/*
           <Image
             style={styles.logo}
             source={require("../assets/dog_logo.jpg")}
           />
+          Get some page break here*/}
+          <View>
+            <Text />
+            <Text />
+          </View>
 
           <Input
             placeholder="Password"
@@ -63,7 +69,7 @@ function WelcomeScreen({ props, navigation, route }) {
             onPress={handleLogIn}
             buttonStyle={{ backgroundColor: colors.primary }}
           />
-          <Tooltip popover={<Text>Password is: GodJul</Text>}>
+          <Tooltip popover={<Text>Password is: PetWeb</Text>}>
             <Text style={styles.forgot}>Forgot password ?</Text>
           </Tooltip>
         </View>

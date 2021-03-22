@@ -28,6 +28,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "An app for participants and organizers of Finnmarksløpet "
+    "description": "This is a prototype of an app for PetWeb SB"
   }
 }

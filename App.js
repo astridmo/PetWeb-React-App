@@ -50,11 +50,11 @@ if (Platform.OS === "android") {
 }
 const Root = createStackNavigator();
 
-class NoteTaker extends Component {
-  render() {
-    return <Home />;
-  }
-}
+// class NoteTaker extends Component {
+//   render() {
+//     return <Home />;
+//   }
+// }
 
 function App() {
   return (
